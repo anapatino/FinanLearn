@@ -1,3 +1,4 @@
+import 'package:finanlearn/ui/utils/Dimensions.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -33,6 +34,84 @@ class _InputState extends State<Input> {
         ),
         focusedBorder: const UnderlineInputBorder(
           borderSide: BorderSide(color: Color.fromRGBO(138, 138, 138, 1)),
+        ),
+      ),
+    );
+  }
+}
+
+class InputColor extends StatelessWidget {
+  final String labelText;
+  final TextEditingController controller;
+  const InputColor({
+    required this.labelText,
+    required this.controller,
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: Dimensions.screenWidth * 0.02),
+      width: Dimensions.screenWidth * 0.55,
+      child: TextField(
+        cursorColor: Colors.black,
+        style: GoogleFonts.inter(color: Colors.black),
+        autofocus: false,
+        controller: controller,
+        decoration: InputDecoration(
+          contentPadding: const EdgeInsets.only(left: 30),
+          filled: true,
+          fillColor: const Color.fromRGBO(217, 217, 217, 1),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(15),
+            borderSide: BorderSide.none,
+          ),
+          focusColor: Colors.black,
+          labelText: labelText,
+          labelStyle: GoogleFonts.inter(
+            fontSize: 14,
+            color: Colors.black,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class InputMedium extends StatelessWidget {
+  final String labelText;
+  final TextEditingController controller;
+  const InputMedium({
+    required this.labelText,
+    required this.controller,
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: Dimensions.screenWidth * 0.02),
+      width: Dimensions.screenWidth * 0.26,
+      child: TextField(
+        cursorColor: Colors.black,
+        style: GoogleFonts.inter(color: Colors.black),
+        autofocus: false,
+        controller: controller,
+        decoration: InputDecoration(
+          contentPadding: const EdgeInsets.only(left: 15),
+          filled: true,
+          fillColor: const Color.fromRGBO(217, 217, 217, 1),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(15),
+            borderSide: BorderSide.none,
+          ),
+          focusColor: Colors.black,
+          labelText: labelText,
+          labelStyle: GoogleFonts.inter(
+            fontSize: 14,
+            color: Colors.black,
+          ),
         ),
       ),
     );

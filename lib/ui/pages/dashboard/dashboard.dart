@@ -1,3 +1,4 @@
+import 'package:finanlearn/ui/pages/calculator/compoundInterest.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -5,6 +6,8 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../utils/Dimensions.dart';
 import '../../widgets/Button.dart';
 import '../../widgets/flashCard.dart';
+import '../calculator/simpleInterest.dart';
+import '../calculator/simpleInterestGuia.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
@@ -87,18 +90,22 @@ class _DashboardState extends State<Dashboard> {
                     children: [
                       Button(
                         color: const Color.fromRGBO(51, 190, 91, 1),
-                        onPressed: () {},
+                        onPressed: () {
+                          Get.offAll(() => const SimpleInterest());
+                        },
                         icon: Icons.calculate_rounded,
-                        title: 'Calculadora\ninteres simple',
+                        title: 'Interes simple',
                       ),
                       SizedBox(
                         width: Dimensions.screenWidth * 0.02,
                       ),
                       Button(
                         color: const Color.fromRGBO(255, 227, 179, 1),
-                        onPressed: () {},
+                        onPressed: () {
+                          Get.offAll(() => const CompoundInterest());
+                        },
                         icon: Icons.calculate_rounded,
-                        title: 'Calculadora\ninteres compuesto',
+                        title: 'Interes compuesto',
                       ),
                     ],
                   ),
@@ -111,9 +118,11 @@ class _DashboardState extends State<Dashboard> {
                       children: [
                         Button(
                           color: const Color.fromRGBO(100, 220, 185, 1),
-                          onPressed: () {},
+                          onPressed: () {
+                            Get.offAll(() => InteresSimple());
+                          },
                           icon: Icons.format_align_left_rounded,
-                          title: 'Historial\ninteres simple',
+                          title: 'Historial',
                         ),
                         SizedBox(
                           width: Dimensions.screenWidth * 0.02,
@@ -121,8 +130,8 @@ class _DashboardState extends State<Dashboard> {
                         Button(
                           color: const Color.fromRGBO(11, 138, 47, 1),
                           onPressed: () {},
-                          icon: Icons.format_align_left_rounded,
-                          title: 'Historial\ninteres compuesto',
+                          icon: Icons.play_arrow_rounded,
+                          title: 'Test',
                         ),
                       ],
                     ),
