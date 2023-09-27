@@ -1,3 +1,4 @@
+import 'package:finanlearn/ui/pages/dashboard/Dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -14,6 +15,16 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   TextEditingController controlEmail = TextEditingController();
   TextEditingController controlPassword = TextEditingController();
+  void viewSnackBar(String title, String message, Color backgroundColor) {
+    Get.snackbar(
+      title,
+      message,
+      icon: const Icon(Icons.warning),
+      backgroundColor: backgroundColor,
+      duration: const Duration(seconds: 5),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -82,51 +93,72 @@ class _LoginState extends State<Login> {
                 padding: EdgeInsets.only(
                   left: Dimensions.screenWidth * 0.03,
                 ),
-                child: Container(
-                  width: Dimensions.width80,
-                  height: Dimensions.screenHeight * 0.35,
-                  decoration: const BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.all(
-                        (Radius.circular(20)),
-                      )),
-                  child: Padding(
-                    padding: EdgeInsets.only(
-                        left: Dimensions.screenWidth * 0.09,
-                        right: Dimensions.screenWidth * 0.09,
-                        top: Dimensions.screenHeight * 0.02),
-                    child: Column(
-                      children: [
-                        Input(labelText: 'Correo', controller: controlEmail),
-                        SizedBox(
-                          height: Dimensions.screenHeight * 0.02,
+                child: SizedBox(
+                  height: Dimensions.screenHeight * 0.40,
+                  child: Stack(
+                    children: [
+                      Container(
+                        width: Dimensions.width80,
+                        height: Dimensions.screenHeight * 0.35,
+                        decoration: const BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.all(
+                              (Radius.circular(20)),
+                            )),
+                        child: Padding(
+                          padding: EdgeInsets.only(
+                              left: Dimensions.screenWidth * 0.09,
+                              right: Dimensions.screenWidth * 0.09,
+                              top: Dimensions.screenHeight * 0.02),
+                          child: Column(
+                            children: [
+                              SizedBox(
+                                height: Dimensions.screenHeight * 0.02,
+                              ),
+                              Input(
+                                labelText: 'Correo',
+                                controller: controlEmail,
+                                isPassword: false,
+                              ),
+                              SizedBox(
+                                height: Dimensions.screenHeight * 0.02,
+                              ),
+                              Input(
+                                labelText: 'Contraseña',
+                                controller: controlPassword,
+                                isPassword: true,
+                              ),
+                            ],
+                          ),
                         ),
-                        Input(
-                            labelText: 'Contraseña',
-                            controller: controlPassword),
-                      ],
-                    ),
+                      ),
+                      Positioned(
+                        top: Dimensions.screenHeight * 0.3,
+                        left: Dimensions.width10,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Get.offAll(() => const Dashboard());
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor:
+                                const Color.fromRGBO(51, 190, 91, 1),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(50),
+                            ),
+                            minimumSize: Size(
+                                Dimensions.width60, Dimensions.buttonHeight),
+                          ),
+                          child: Text("Ingresar",
+                              style: GoogleFonts.inter(
+                                color: Colors.white,
+                                fontSize: 20,
+                                letterSpacing: 1.6,
+                              )),
+                        ),
+                      )
+                    ],
                   ),
                 ),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  Get.offAllNamed('/login');
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color.fromRGBO(51, 190, 91, 1),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(50),
-                  ),
-                  minimumSize:
-                      Size(Dimensions.width60, Dimensions.buttonHeight),
-                ),
-                child: Text("Ingresar",
-                    style: GoogleFonts.inter(
-                      color: Colors.white,
-                      fontSize: 20,
-                      letterSpacing: 1.6,
-                    )),
               ),
             ],
           ),

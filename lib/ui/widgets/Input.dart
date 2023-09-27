@@ -4,10 +4,12 @@ import 'package:google_fonts/google_fonts.dart';
 class Input extends StatefulWidget {
   final String labelText;
   final TextEditingController controller;
+  final bool isPassword;
   const Input({
     Key? key,
     required this.labelText,
     required this.controller,
+    required this.isPassword,
   }) : super(key: key);
 
   @override
@@ -18,6 +20,7 @@ class _InputState extends State<Input> {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      obscureText: widget.isPassword,
       controller: widget.controller,
       style: GoogleFonts.inter(color: Colors.black),
       cursorColor: Colors.black,
