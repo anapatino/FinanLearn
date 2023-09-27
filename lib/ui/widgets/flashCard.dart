@@ -8,12 +8,14 @@ class FlashCard extends StatelessWidget {
   final Color color;
   final String title;
   final IconData icon;
+  final String description;
 
   const FlashCard({
     required this.onPressed,
     required this.color,
     required this.title,
     required this.icon,
+    required this.description,
     Key? key,
   }) : super(key: key);
 
@@ -29,10 +31,12 @@ class FlashCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(20),
         ),
         maximumSize:
-            Size(Dimensions.screenWidth * 0.58, Dimensions.screenHeight * 0.2),
+            Size(Dimensions.screenWidth * 0.58, Dimensions.screenHeight * 0.4),
         elevation: 0,
       ),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
             height: Dimensions.screenHeight * 0.17,
@@ -56,8 +60,17 @@ class FlashCard extends StatelessWidget {
           Text(title,
               style: GoogleFonts.inter(
                 color: Colors.black,
-                fontSize: 12.1,
+                fontSize: 12,
                 fontWeight: FontWeight.bold,
+              )),
+          SizedBox(
+            height: Dimensions.screenHeight * 0.01,
+          ),
+          Text(description,
+              style: GoogleFonts.inter(
+                color: Colors.black,
+                fontSize: 10,
+                fontWeight: FontWeight.w300,
               )),
         ],
       ),

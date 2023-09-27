@@ -76,7 +76,7 @@ class _DashboardState extends State<Dashboard> {
             Padding(
               padding: EdgeInsets.only(
                 left: Dimensions.screenWidth * 0.08,
-                top: Dimensions.screenHeight * 0.08,
+                top: Dimensions.screenHeight * 0.05,
                 right: Dimensions.screenWidth * 0.08,
               ),
               child: Column(
@@ -147,15 +147,17 @@ class _DashboardState extends State<Dashboard> {
               ),
             ),
             SizedBox(
-                height: Dimensions.screenHeight * 0.25,
+                height: Dimensions.screenHeight * 0.3,
                 child: ListView(
                   scrollDirection: Axis.horizontal,
                   children: [
                     FlashCard(
                       color: const Color.fromRGBO(100, 220, 185, 1),
                       onPressed: () {},
-                      icon: Icons.format_align_left_rounded,
-                      title: 'Historial\ninteres simple',
+                      icon: Icons.movie_creation_rounded,
+                      title: 'Aprende interes simple en 5 minutos!',
+                      description:
+                          'Aprovecha el tiempo y aprende todo lo que puedas viendo este video.',
                     ),
                     SizedBox(
                       width: Dimensions.screenWidth * 0.02,
@@ -163,8 +165,11 @@ class _DashboardState extends State<Dashboard> {
                     FlashCard(
                       color: const Color.fromRGBO(11, 138, 47, 1),
                       onPressed: () {},
-                      icon: Icons.format_align_left_rounded,
-                      title: 'Historial\ninteres compuesto',
+                      icon: Icons.article_rounded,
+                      title:
+                          'La mejor guia para aprender sobre el interes simple',
+                      description:
+                          'Aprovecha el tiempo y aprende todo lo que puedas leyendo este articulo.',
                     ),
                     SizedBox(
                       width: Dimensions.screenWidth * 0.02,
@@ -172,8 +177,10 @@ class _DashboardState extends State<Dashboard> {
                     FlashCard(
                       color: const Color.fromRGBO(11, 138, 47, 1),
                       onPressed: () {},
-                      icon: Icons.format_align_left_rounded,
-                      title: 'Historial\ninteres compuesto',
+                      icon: Icons.article_rounded,
+                      title: 'todo lo que no sabes de interes compuesto',
+                      description:
+                          'Aprovecha el tiempo y aprende todo lo que puedas leyendo este articulo.',
                     ),
                   ],
                 )),

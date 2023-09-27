@@ -128,7 +128,7 @@ class _RegisterState extends State<Register> {
                         left: Dimensions.width10,
                         child: ElevatedButton(
                           onPressed: () {
-                            Get.offAllNamed('/principal');
+                            Get.offAll(() => const Dashboard());
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor:
