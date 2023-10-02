@@ -1,4 +1,5 @@
 import 'package:finanlearn/ui/pages/calculator/compoundInterest.dart';
+import 'package:finanlearn/ui/pages/pageTest/test.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -8,6 +9,7 @@ import '../../widgets/Button.dart';
 import '../../widgets/flashCard.dart';
 import '../calculator/simpleInterest.dart';
 import '../calculator/simpleInterestGuia.dart';
+import '../history/history.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
@@ -119,7 +121,7 @@ class _DashboardState extends State<Dashboard> {
                         Button(
                           color: const Color.fromRGBO(100, 220, 185, 1),
                           onPressed: () {
-                            Get.offAll(() => InteresSimple());
+                            Get.offAll(() => const History());
                           },
                           icon: Icons.format_align_left_rounded,
                           title: 'Historial',
@@ -129,7 +131,9 @@ class _DashboardState extends State<Dashboard> {
                         ),
                         Button(
                           color: const Color.fromRGBO(11, 138, 47, 1),
-                          onPressed: () {},
+                          onPressed: () {
+                            Get.offAll(() => const Test());
+                          },
                           icon: Icons.play_arrow_rounded,
                           title: 'Test',
                         ),
@@ -168,9 +172,6 @@ class _DashboardState extends State<Dashboard> {
                       description:
                           'Aprovecha el tiempo y aprende todo lo que puedas viendo este video.',
                     ),
-                    SizedBox(
-                      width: Dimensions.screenWidth * 0.02,
-                    ),
                     FlashCard(
                       color: const Color.fromRGBO(11, 138, 47, 1),
                       onPressed: () {},
@@ -179,9 +180,6 @@ class _DashboardState extends State<Dashboard> {
                           'La mejor guia para aprender sobre el interes simple',
                       description:
                           'Aprovecha el tiempo y aprende todo lo que puedas leyendo este articulo.',
-                    ),
-                    SizedBox(
-                      width: Dimensions.screenWidth * 0.02,
                     ),
                     FlashCard(
                       color: const Color.fromRGBO(11, 138, 47, 1),
