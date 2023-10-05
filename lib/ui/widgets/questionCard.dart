@@ -4,12 +4,14 @@ import '../utils/Dimensions.dart';
 
 class QuestionCard extends StatefulWidget {
   final String title;
+  final Color color;
   final String description;
   final Map<String, String> listOptions;
   final String result;
 
   const QuestionCard({
     required this.title,
+    required this.color,
     required this.description,
     required this.listOptions,
     required this.result,
@@ -38,7 +40,7 @@ class _QuestionCardState extends State<QuestionCard> {
             children: [
               Text(widget.title,
                   style: GoogleFonts.inter(
-                    color: Colors.black,
+                    color: widget.color,
                     fontSize: 19,
                     fontWeight: FontWeight.bold,
                   )),

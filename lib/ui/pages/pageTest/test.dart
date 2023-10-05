@@ -49,7 +49,7 @@ class _TestState extends State<Test> {
                 ),
                 child: Text('Test de aprendizaje',
                     style: GoogleFonts.inter(
-                      color: Colors.black,
+                      color: const Color.fromRGBO(51, 190, 91, 1),
                       fontSize: 29,
                       fontWeight: FontWeight.bold,
                     )),
@@ -71,6 +71,7 @@ class _TestState extends State<Test> {
                           'opcion3': '100 euros',
                         },
                         result: '300 euros',
+                        color: Color.fromRGBO(100, 220, 185, 1),
                       ),
                       QuestionCard(
                         title: 'Pregunta 2',
@@ -82,6 +83,7 @@ class _TestState extends State<Test> {
                           'opcion3': '100 euros',
                         },
                         result: '400 euros',
+                        color: Color.fromRGBO(11, 138, 47, 1),
                       ),
                       QuestionCard(
                         title: 'Pregunta 3',
@@ -93,6 +95,7 @@ class _TestState extends State<Test> {
                           'opcion3': '100',
                         },
                         result: '1060',
+                        color: Color.fromRGBO(100, 220, 185, 1),
                       ),
                       QuestionCard(
                         title: 'Pregunta 4',
@@ -104,6 +107,7 @@ class _TestState extends State<Test> {
                           'opcion3': '9611.27',
                         },
                         result: '9611.57',
+                        color: Color.fromRGBO(11, 138, 47, 1),
                       ),
                     ],
                   ),

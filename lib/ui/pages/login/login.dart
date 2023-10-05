@@ -2,8 +2,10 @@ import 'package:finanlearn/ui/pages/dashboard/Dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../../../domain/models/user.dart';
 import '../../utils/Dimensions.dart';
 import '../../widgets/Input.dart';
+import '../../widgets/messageResponse.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -137,7 +139,20 @@ class _LoginState extends State<Login> {
                         left: Dimensions.width10,
                         child: ElevatedButton(
                           onPressed: () {
-                            Get.offAll(() => const Dashboard());
+                            Users user = findUser(
+                              context,
+                              controlEmail,
+                              controlPassword,
+                            );
+                            // ignore: unnecessary_null_comparison
+                            if (user != null) {
+                              Get.offAll(() => const Dashboard());
+                            } else {
+                              messageResponse(context,
+                                  "El usuario o contraseña no es correcto");
+                            }
+                            controlEmail.clear();
+                            controlPassword.clear();
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor:
@@ -165,5 +180,22 @@ class _LoginState extends State<Login> {
         ),
       ),
     );
+  }
+
+  findUser(BuildContext context, TextEditingController controlEmail,
+      TextEditingController controlPassword) {
+    String email = controlEmail.text;
+    String password = controlPassword.text;
+    if (email.isNotEmpty && password.isNotEmpty) {
+      for (var element in listUsers) {
+        if (element.email == email && element.password == password) {
+          return element;
+        }
+      }
+    } else {
+      messageResponse(context, "El correo/contraseña no ha sido ingresado");
+    }
+
+    return false;
   }
 }

@@ -3,7 +3,7 @@ import 'package:finanlearn/ui/pages/pageTest/test.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import '../../../domain/models/user.dart';
 import '../../utils/Dimensions.dart';
 import '../../widgets/Button.dart';
 import '../../widgets/flashCard.dart';
@@ -12,7 +12,8 @@ import '../calculator/simpleInterestGuia.dart';
 import '../history/history.dart';
 
 class Dashboard extends StatefulWidget {
-  const Dashboard({super.key});
+  final String lastName;
+  const Dashboard({Key? key, required this.lastName}) : super(key: key);
 
   @override
   State<Dashboard> createState() => _DashboardState();
@@ -69,7 +70,7 @@ class _DashboardState extends State<Dashboard> {
                   Positioned(
                     top: Dimensions.screenHeight * 0.135,
                     left: Dimensions.screenWidth * 0.3,
-                    child: Text("Aponte",
+                    child: Text(widget.lastName,
                         style: GoogleFonts.inter(
                             color: Colors.black,
                             fontSize: 39,
@@ -166,28 +167,31 @@ class _DashboardState extends State<Dashboard> {
                   children: [
                     FlashCard(
                       color: const Color.fromRGBO(100, 220, 185, 1),
-                      onPressed: () {},
                       icon: Icons.movie_creation_rounded,
                       title: 'Aprende interes simple en 5 minutos!',
                       description:
                           'Aprovecha el tiempo y aprende todo lo que puedas viendo este video.',
+                      youtubeUrl: Uri.parse(
+                          'https://www.youtube.com/watch?v=zYXZpytxgGA'),
                     ),
                     FlashCard(
                       color: const Color.fromRGBO(11, 138, 47, 1),
-                      onPressed: () {},
                       icon: Icons.article_rounded,
                       title:
                           'La mejor guia para aprender sobre el interes simple',
                       description:
                           'Aprovecha el tiempo y aprende todo lo que puedas leyendo este articulo.',
+                      youtubeUrl: Uri.parse(
+                          'https://www.youtube.com/watch?v=zYXZpytxgGA'),
                     ),
                     FlashCard(
                       color: const Color.fromRGBO(11, 138, 47, 1),
-                      onPressed: () {},
                       icon: Icons.article_rounded,
                       title: 'todo lo que no sabes de interes compuesto',
                       description:
                           'Aprovecha el tiempo y aprende todo lo que puedas leyendo este articulo.',
+                      youtubeUrl: Uri.parse(
+                          'https://www.youtube.com/watch?v=zYXZpytxgGA'),
                     ),
                   ],
                 )),
