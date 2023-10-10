@@ -1,9 +1,11 @@
+import 'package:finanlearn/domain/models/user.dart';
 import 'package:finanlearn/ui/widgets/Input.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../utils/Dimensions.dart';
+import '../../widgets/messageResponse.dart';
 import '../dashboard/Dashboard.dart';
 
 class Register extends StatefulWidget {
@@ -128,7 +130,15 @@ class _RegisterState extends State<Register> {
                         left: Dimensions.width10,
                         child: ElevatedButton(
                           onPressed: () {
-                            Get.offAll(() => const Dashboard());
+                            if (validation(
+                                    context,
+                                    controlFirstName,
+                                    controlLastName,
+                                    controlEmail,
+                                    controlPassword) ==
+                                true) {
+                              Get.offAll(() => const Dashboard());
+                            }
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor:
@@ -156,5 +166,35 @@ class _RegisterState extends State<Register> {
         ),
       ),
     );
+  }
+
+  validation(
+      BuildContext context,
+      TextEditingController controlFirstName,
+      TextEditingController controlLastName,
+      TextEditingController controlEmail,
+      TextEditingController controlPassword) {
+    String firstName = controlFirstName.text;
+    String lastName = controlLastName.text;
+    String email = controlEmail.text;
+    String password = controlPassword.text;
+    if (firstName.isNotEmpty &&
+        lastName.isNotEmpty &&
+        email.isNotEmpty &&
+        password.isNotEmpty) {
+      listUsers.add(Users(
+          firstName: firstName,
+          lastName: lastName,
+          email: email,
+          password: password));
+      messageResponse(context, "El usuario registrado");
+      for (var element in listUsers) {
+        print(element.firstName);
+      }
+      return true;
+    } else {
+      messageResponse(context, "El usuario no ha sido ingresado");
+    }
+    return false;
   }
 }

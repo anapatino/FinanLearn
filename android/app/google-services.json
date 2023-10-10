@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "952360999509",
+    "project_id": "finanlearn",
+    "storage_bucket": "finanlearn.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:952360999509:android:4cf820bccf2703729e12dc",
+        "android_client_info": {
+          "package_name": "com.example.finanlearn"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBHDpugnG3oALNOFsuqSg4Fo0LViN82yUI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -12,8 +12,7 @@ import '../calculator/simpleInterestGuia.dart';
 import '../history/history.dart';
 
 class Dashboard extends StatefulWidget {
-  final String lastName;
-  const Dashboard({Key? key, required this.lastName}) : super(key: key);
+  const Dashboard({super.key});
 
   @override
   State<Dashboard> createState() => _DashboardState();
@@ -70,7 +69,7 @@ class _DashboardState extends State<Dashboard> {
                   Positioned(
                     top: Dimensions.screenHeight * 0.135,
                     left: Dimensions.screenWidth * 0.3,
-                    child: Text(widget.lastName,
+                    child: Text('Usuario',
                         style: GoogleFonts.inter(
                             color: Colors.black,
                             fontSize: 39,

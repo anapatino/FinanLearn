@@ -139,13 +139,11 @@ class _LoginState extends State<Login> {
                         left: Dimensions.width10,
                         child: ElevatedButton(
                           onPressed: () {
-                            Users user = findUser(
+                            if (findUser(
                               context,
                               controlEmail,
                               controlPassword,
-                            );
-                            // ignore: unnecessary_null_comparison
-                            if (user != null) {
+                            )) {
                               Get.offAll(() => const Dashboard());
                             } else {
                               messageResponse(context,
@@ -189,7 +187,9 @@ class _LoginState extends State<Login> {
     if (email.isNotEmpty && password.isNotEmpty) {
       for (var element in listUsers) {
         if (element.email == email && element.password == password) {
-          return element;
+          return true;
+        } else {
+          return false;
         }
       }
     } else {
