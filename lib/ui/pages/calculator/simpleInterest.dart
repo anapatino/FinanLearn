@@ -55,7 +55,7 @@ class _SimpleInterestState extends State<SimpleInterest> {
                   child: Text('Calcular\ninteres simple',
                       style: GoogleFonts.inter(
                         color: Colors.black,
-                        fontSize: 29,
+                        fontSize: Dimensions.screenWidth * 0.08,
                         fontWeight: FontWeight.bold,
                       )),
                 ),
@@ -81,16 +81,16 @@ class _SimpleInterestState extends State<SimpleInterest> {
                           Text('Resultado',
                               style: GoogleFonts.inter(
                                 color: Colors.white,
-                                fontSize: 15,
+                                fontSize: Dimensions.screenWidth * 0.055,
                                 fontWeight: FontWeight.bold,
                               )),
                           SizedBox(
-                            height: Dimensions.screenHeight * 0.02,
+                            height: Dimensions.screenHeight * 0.015,
                           ),
                           Text('0.39',
                               style: GoogleFonts.inter(
                                 color: Colors.white,
-                                fontSize: 22,
+                                fontSize: Dimensions.screenWidth * 0.07,
                                 fontWeight: FontWeight.bold,
                               )),
                         ]),
@@ -182,10 +182,10 @@ class _SimpleInterestState extends State<SimpleInterest> {
                     minimumSize: Size(
                         Dimensions.width40, Dimensions.screenHeight * 0.07),
                   ),
-                  child: Text("Ingresar",
+                  child: Text("Calcular",
                       style: GoogleFonts.inter(
                         color: Colors.white,
-                        fontSize: 14,
+                        fontSize: Dimensions.screenWidth * 0.05,
                         letterSpacing: 1,
                       )),
                 ),

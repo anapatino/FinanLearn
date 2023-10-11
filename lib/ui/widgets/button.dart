@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../utils/Dimensions.dart';
 
@@ -52,7 +51,7 @@ class Button extends StatelessWidget {
             Text(title,
                 style: GoogleFonts.inter(
                   color: Colors.white,
-                  fontSize: 14,
+                  fontSize: Dimensions.screenWidth * 0.04,
                   fontWeight: FontWeight.bold,
                 )),
           ],

@@ -1,4 +1,6 @@
+import 'package:finanlearn/domain/models/user.dart';
 import 'package:finanlearn/ui/widgets/Input.dart';
+import 'package:finanlearn/ui/widgets/messageResponse.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -53,7 +55,7 @@ class _RegisterState extends State<Register> {
                 child: Text("Registrar  ",
                     style: GoogleFonts.inter(
                         color: Colors.white,
-                        fontSize: 45,
+                        fontSize: Dimensions.screenWidth * 0.15,
                         letterSpacing: 1.6,
                         fontWeight: FontWeight.w600)),
               ),
@@ -64,7 +66,7 @@ class _RegisterState extends State<Register> {
                 child: Text("para aprender y crecer financieramente",
                     style: GoogleFonts.inter(
                         color: Colors.white,
-                        fontSize: 15,
+                        fontSize: Dimensions.screenWidth * 0.04,
                         fontWeight: FontWeight.normal)),
               ),
               Padding(
@@ -77,7 +79,7 @@ class _RegisterState extends State<Register> {
                     children: [
                       Container(
                         width: Dimensions.width80,
-                        height: Dimensions.screenHeight * 0.50,
+                        height: Dimensions.screenHeight * 0.45,
                         decoration: const BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.all(
@@ -124,10 +126,17 @@ class _RegisterState extends State<Register> {
                         ),
                       ),
                       Positioned(
-                        top: Dimensions.screenHeight * 0.45,
+                        top: Dimensions.screenHeight * 0.41,
                         left: Dimensions.width10,
                         child: ElevatedButton(
                           onPressed: () {
+                            registerUser(
+                              context,
+                              controlFirstName,
+                              controlLastName,
+                              controlEmail,
+                              controlPassword,
+                            );
                             Get.offAll(() => const Dashboard());
                           },
                           style: ElevatedButton.styleFrom(
@@ -142,7 +151,7 @@ class _RegisterState extends State<Register> {
                           child: Text("Registrar",
                               style: GoogleFonts.inter(
                                 color: Colors.white,
-                                fontSize: 20,
+                                fontSize: Dimensions.screenWidth * 0.05,
                                 letterSpacing: 1.6,
                               )),
                         ),
@@ -156,5 +165,23 @@ class _RegisterState extends State<Register> {
         ),
       ),
     );
+  }
+
+  registerUser(
+      BuildContext context,
+      TextEditingController controlFirstName,
+      TextEditingController controlLastName,
+      TextEditingController controlEmail,
+      TextEditingController controlPassword) {
+    String firstName = controlFirstName.text;
+    String lastName = controlLastName.text;
+    String email = controlEmail.text;
+    String password = controlPassword.text;
+    listUsers.add(Users(
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        password: password));
+    messageResponse(context, "El usuario  ha sido registrado");
   }
 }

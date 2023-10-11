@@ -37,7 +37,7 @@ class FlashCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              height: Dimensions.screenHeight * 0.17,
+              height: Dimensions.screenHeight * 0.16,
               width: Dimensions.screenWidth * 0.65,
               decoration: BoxDecoration(
                   color: color,
@@ -58,7 +58,7 @@ class FlashCard extends StatelessWidget {
             Text(title,
                 style: GoogleFonts.inter(
                   color: Colors.black,
-                  fontSize: 12,
+                  fontSize: Dimensions.screenWidth * 0.035,
                   fontWeight: FontWeight.bold,
                 )),
             SizedBox(
@@ -67,7 +67,7 @@ class FlashCard extends StatelessWidget {
             Text(description,
                 style: GoogleFonts.inter(
                   color: Colors.black,
-                  fontSize: 10,
+                  fontSize: Dimensions.screenWidth * 0.03,
                   fontWeight: FontWeight.w300,
                 )),
           ],

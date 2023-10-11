@@ -3,12 +3,10 @@ import 'package:finanlearn/ui/pages/pageTest/test.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../../../domain/models/user.dart';
 import '../../utils/Dimensions.dart';
 import '../../widgets/Button.dart';
 import '../../widgets/flashCard.dart';
 import '../calculator/simpleInterest.dart';
-import '../calculator/simpleInterestGuia.dart';
 import '../history/history.dart';
 
 class Dashboard extends StatefulWidget {
@@ -65,7 +63,7 @@ class _DashboardState extends State<Dashboard> {
                     child: Text("Hola,",
                         style: GoogleFonts.inter(
                             color: Colors.black,
-                            fontSize: 30,
+                            fontSize: Dimensions.screenWidth * 0.08,
                             fontWeight: FontWeight.normal)),
                   ),
                   Positioned(
@@ -74,7 +72,7 @@ class _DashboardState extends State<Dashboard> {
                     child: Text("Usuario",
                         style: GoogleFonts.inter(
                             color: Colors.black,
-                            fontSize: 39,
+                            fontSize: Dimensions.screenWidth * 0.1,
                             fontWeight: FontWeight.bold)),
                   ),
                 ],
@@ -151,7 +149,7 @@ class _DashboardState extends State<Dashboard> {
                           child: Text("Material Educativo",
                               style: GoogleFonts.inter(
                                 color: Colors.black,
-                                fontSize: 24.5,
+                                fontSize: Dimensions.screenWidth * 0.075,
                                 fontWeight: FontWeight.bold,
                               )),
                         )

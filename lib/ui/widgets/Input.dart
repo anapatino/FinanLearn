@@ -29,7 +29,7 @@ class _InputState extends State<Input> {
         labelText: widget.labelText,
         focusColor: const Color.fromRGBO(138, 138, 138, 1),
         labelStyle: GoogleFonts.inter(
-          fontSize: 16,
+          fontSize: Dimensions.screenWidth * 0.05,
           color: const Color.fromRGBO(138, 138, 138, 1),
         ),
         focusedBorder: const UnderlineInputBorder(
@@ -70,7 +70,7 @@ class InputColor extends StatelessWidget {
           focusColor: Colors.black,
           labelText: labelText,
           labelStyle: GoogleFonts.inter(
-            fontSize: 14,
+            fontSize: Dimensions.screenWidth * 0.04,
             color: Colors.black,
           ),
         ),
@@ -109,7 +109,7 @@ class InputMedium extends StatelessWidget {
           focusColor: Colors.black,
           labelText: labelText,
           labelStyle: GoogleFonts.inter(
-            fontSize: 14,
+            fontSize: Dimensions.screenWidth * 0.04,
             color: Colors.black,
           ),
         ),
