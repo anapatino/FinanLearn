@@ -25,7 +25,13 @@ class QuestionCard extends StatefulWidget {
 class _QuestionCardState extends State<QuestionCard> {
   @override
   Widget build(BuildContext context) {
-    String _selectedOption = widget.listOptions.keys.first;
+    late String _selectedOption;
+
+    @override
+    void initState() {
+      super.initState();
+      _selectedOption = widget.listOptions.keys.first;
+    }
 
     return Padding(
       padding: EdgeInsets.only(bottom: Dimensions.screenHeight * 0.02),
