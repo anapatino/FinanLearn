@@ -1,4 +1,4 @@
-import 'package:finanlearn/ui/utils/Dimensions.dart';
+import 'package:finanlearn/ui/utils/dimensions.dart';
 import 'package:finanlearn/ui/widgets/card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

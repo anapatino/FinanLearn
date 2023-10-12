@@ -1,3 +1,4 @@
+import 'package:finanlearn/firebase_options.dart';
 import 'package:finanlearn/ui/pages/app.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -10,7 +11,8 @@ void main() async {
 
   try {
     // Inicializa Firebase
-    await Firebase.initializeApp();
+    await Firebase.initializeApp(
+        options: DefaultFirebaseOptions.currentPlatform);
 
     // Realiza la consulta a Firestore
     FirebaseFirestore.instance.collection('user').get().then((respuesta) {

@@ -1,15 +1,13 @@
-import 'package:finanlearn/ui/pages/calculator/compoundInterest.dart';
+import 'package:finanlearn/ui/pages/calculator/compound_interest.dart';
+import 'package:finanlearn/ui/pages/history/history.dart';
 import 'package:finanlearn/ui/pages/pageTest/test.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../../../domain/models/user.dart';
 import '../../utils/Dimensions.dart';
 import '../../widgets/Button.dart';
 import '../../widgets/flashCard.dart';
-import '../calculator/simpleInterest.dart';
-import '../calculator/simpleInterestGuia.dart';
-import '../history/history.dart';
+import '../calculator/simple_interest.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});

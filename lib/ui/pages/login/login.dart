@@ -1,10 +1,11 @@
+import 'package:finanlearn/domain/controllers/user_controller.dart';
 import 'package:finanlearn/ui/pages/dashboard/Dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../domain/models/user.dart';
-import '../../utils/Dimensions.dart';
-import '../../widgets/Input.dart';
+import '../../utils/dimensions.dart';
+import '../../widgets/input.dart';
 import '../../widgets/messageResponse.dart';
 
 class Login extends StatefulWidget {
@@ -17,6 +18,7 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   TextEditingController controlEmail = TextEditingController();
   TextEditingController controlPassword = TextEditingController();
+  UserController userController = Get.find();
   void viewSnackBar(String title, String message, Color backgroundColor) {
     Get.snackbar(
       title,

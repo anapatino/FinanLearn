@@ -1,10 +1,10 @@
 import 'package:finanlearn/domain/models/user.dart';
-import 'package:finanlearn/ui/widgets/Input.dart';
+import 'package:finanlearn/ui/widgets/input.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../utils/Dimensions.dart';
+import '../../utils/dimensions.dart';
 import '../../widgets/messageResponse.dart';
 import '../dashboard/Dashboard.dart';
 
