@@ -3,6 +3,7 @@ import 'package:finanlearn/ui/pages/dashboard/Dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../../../domain/controllers/publicity_controller.dart';
 import '../../../domain/models/user.dart';
 import '../../utils/dimensions.dart';
 import '../../widgets/input.dart';
@@ -19,15 +20,7 @@ class _LoginState extends State<Login> {
   TextEditingController controlEmail = TextEditingController();
   TextEditingController controlPassword = TextEditingController();
   UserController userController = Get.find();
-  void viewSnackBar(String title, String message, Color backgroundColor) {
-    Get.snackbar(
-      title,
-      message,
-      icon: const Icon(Icons.warning),
-      backgroundColor: backgroundColor,
-      duration: const Duration(seconds: 5),
-    );
-  }
+  PublicityController publicityController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -140,20 +133,7 @@ class _LoginState extends State<Login> {
                         top: Dimensions.screenHeight * 0.3,
                         left: Dimensions.width10,
                         child: ElevatedButton(
-                          onPressed: () {
-                            if (findUser(
-                              context,
-                              controlEmail,
-                              controlPassword,
-                            )) {
-                              Get.offAll(() => const Dashboard());
-                            } else {
-                              messageResponse(context,
-                                  "El usuario o contraseña no es correcto");
-                            }
-                            controlEmail.clear();
-                            controlPassword.clear();
-                          },
+                          onPressed: loginUser,
                           style: ElevatedButton.styleFrom(
                             backgroundColor:
                                 const Color.fromRGBO(51, 190, 91, 1),
@@ -199,5 +179,28 @@ class _LoginState extends State<Login> {
     }
 
     return false;
+  }
+
+  void loginUser() {
+    String email = controlEmail.text;
+    String password = controlPassword.text;
+
+    if (email.isNotEmpty && password.isNotEmpty) {
+      userController.login(email, password).then((value) {
+        if (userController.userEmail.isNotEmpty) {
+          publicityController.viewPublicity();
+          Get.offAll(() => const Dashboard());
+        } else {
+          messageResponse(context, "El correo/contraseña no es correcto");
+        }
+      }).catchError((error) {
+        messageResponse(context, "Error: $error");
+      });
+
+      controlEmail.clear();
+      controlPassword.clear();
+    } else {
+      messageResponse(context, "Por favor, ingresa el correo y la contraseña.");
+    }
   }
 }

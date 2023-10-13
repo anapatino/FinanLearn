@@ -1,12 +1,16 @@
+import 'package:finanlearn/domain/models/publicity.dart';
 import 'package:finanlearn/ui/pages/calculator/compound_interest.dart';
 import 'package:finanlearn/ui/pages/history/history.dart';
 import 'package:finanlearn/ui/pages/pageTest/test.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../../../data/service/publicity_request.dart';
+import '../../../domain/controllers/publicity_controller.dart';
+import '../../../domain/controllers/user_controller.dart';
 import '../../utils/Dimensions.dart';
 import '../../widgets/Button.dart';
-import '../../widgets/flashCard.dart';
+import '../../widgets/flash_card.dart';
 import '../calculator/simple_interest.dart';
 
 class Dashboard extends StatefulWidget {
@@ -17,6 +21,9 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
+  UserController userController = Get.find();
+  PublicityController publicityController = Get.find();
+  late Future<List<Publicity>> listPublicity = PublicityRequest.viewPublicity();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,7 +74,10 @@ class _DashboardState extends State<Dashboard> {
                   Positioned(
                     top: Dimensions.screenHeight * 0.135,
                     left: Dimensions.screenWidth * 0.3,
-                    child: Text('Usuario',
+                    child: Text(
+                        userController.lastName.isNotEmpty
+                            ? userController.lastName
+                            : 'Usuario',
                         style: GoogleFonts.inter(
                             color: Colors.black,
                             fontSize: 39,
@@ -158,43 +168,43 @@ class _DashboardState extends State<Dashboard> {
               ),
             ),
             SizedBox(
-                height: Dimensions.screenHeight * 0.3,
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: [
-                    FlashCard(
-                      color: const Color.fromRGBO(100, 220, 185, 1),
-                      icon: Icons.movie_creation_rounded,
-                      title: 'Aprende interes simple en 5 minutos!',
-                      description:
-                          'Aprovecha el tiempo y aprende todo lo que puedas viendo este video.',
-                      youtubeUrl: Uri.parse(
-                          'https://www.youtube.com/watch?v=zYXZpytxgGA'),
-                    ),
-                    FlashCard(
-                      color: const Color.fromRGBO(11, 138, 47, 1),
-                      icon: Icons.article_rounded,
-                      title:
-                          'La mejor guia para aprender sobre el interes simple',
-                      description:
-                          'Aprovecha el tiempo y aprende todo lo que puedas leyendo este articulo.',
-                      youtubeUrl: Uri.parse(
-                          'https://www.youtube.com/watch?v=zYXZpytxgGA'),
-                    ),
-                    FlashCard(
-                      color: const Color.fromRGBO(11, 138, 47, 1),
-                      icon: Icons.article_rounded,
-                      title: 'todo lo que no sabes de interes compuesto',
-                      description:
-                          'Aprovecha el tiempo y aprende todo lo que puedas leyendo este articulo.',
-                      youtubeUrl: Uri.parse(
-                          'https://www.youtube.com/watch?v=zYXZpytxgGA'),
-                    ),
-                  ],
-                )),
+                height: Dimensions.screenHeight * 0.3, child: viewPublicity()),
           ],
         ),
       ),
+    );
+  }
+
+  Widget viewPublicity() {
+    return ListView.builder(
+      scrollDirection: Axis.horizontal,
+      itemCount: publicityController.listPublicity?.isEmpty == true
+          ? 0
+          : publicityController.listPublicity!.length,
+      shrinkWrap: true,
+      itemBuilder: (context, index) {
+        return FutureBuilder<List<Publicity>>(
+          future: listPublicity,
+          builder: (context, position) {
+            if (position.hasData) {
+              return FlashCard(
+                color: position.data![index].type.toString() == 'video'
+                    ? const Color.fromRGBO(100, 220, 185, 1)
+                    : const Color.fromRGBO(11, 138, 47, 1),
+                icon: position.data![index].type.toString() == 'video'
+                    ? Icons.movie_creation_rounded
+                    : Icons.article_rounded,
+                title: position.data![index].title.toString(),
+                description: position.data![index].description.toString(),
+                youtubeUrl: Uri.parse(position.data![index].link.toString()),
+              );
+            } else if (position.hasError) {
+              return Text('${position.error}');
+            }
+            return const CircularProgressIndicator();
+          },
+        );
+      },
     );
   }
 }
