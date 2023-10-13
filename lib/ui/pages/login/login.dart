@@ -1,11 +1,11 @@
-import 'package:finanlearn/ui/pages/dashboard/Dashboard.dart';
+import 'package:finanlearn/ui/pages/dashboard/dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../domain/models/user.dart';
-import '../../utils/Dimensions.dart';
-import '../../widgets/Input.dart';
-import '../../widgets/messageResponse.dart';
+import '../../utils/dimensions.dart';
+import '../../widgets/input.dart';
+import '../../widgets/message_response.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -139,13 +139,13 @@ class _LoginState extends State<Login> {
                         left: Dimensions.width10,
                         child: ElevatedButton(
                           onPressed: () {
-                            Users user = findUser(
-                              context,
-                              controlEmail,
-                              controlPassword,
-                            );
                             // ignore: unnecessary_null_comparison
-                            if (user != null) {
+                            if (findUser(
+                                  context,
+                                  controlEmail,
+                                  controlPassword,
+                                ) !=
+                                null) {
                               Get.offAll(() => const Dashboard());
                             } else {
                               messageResponse(context,
@@ -193,9 +193,9 @@ class _LoginState extends State<Login> {
         }
       }
     } else {
-      messageResponse(context, "El correo/contraseña no ha sido ingresado");
+      return null;
     }
 
-    return false;
+    return null;
   }
 }

@@ -1,19 +1,19 @@
-import 'package:finanlearn/ui/utils/Dimensions.dart';
+import 'package:finanlearn/ui/utils/dimensions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../widgets/Input.dart';
-import '../dashboard/Dashboard.dart';
+import '../../widgets/input.dart';
+import '../dashboard/dashboard.dart';
 
-class SimpleInterest extends StatefulWidget {
-  const SimpleInterest({super.key});
+class CompoundInterest extends StatefulWidget {
+  const CompoundInterest({super.key});
 
   @override
-  State<SimpleInterest> createState() => _SimpleInterestState();
+  State<CompoundInterest> createState() => _CompoundInterestState();
 }
 
-class _SimpleInterestState extends State<SimpleInterest> {
+class _CompoundInterestState extends State<CompoundInterest> {
   TextEditingController controllerYear = TextEditingController();
   TextEditingController controllerMonths = TextEditingController();
   TextEditingController controllerDays = TextEditingController();
@@ -52,7 +52,7 @@ class _SimpleInterestState extends State<SimpleInterest> {
                 ),
                 Padding(
                   padding: EdgeInsets.only(left: Dimensions.screenWidth * 0.03),
-                  child: Text('Calcular\ninteres simple',
+                  child: Text('Calcular\ninteres compuesto',
                       style: GoogleFonts.inter(
                         color: Colors.black,
                         fontSize: Dimensions.screenWidth * 0.08,
@@ -81,7 +81,7 @@ class _SimpleInterestState extends State<SimpleInterest> {
                           Text('Resultado',
                               style: GoogleFonts.inter(
                                 color: Colors.white,
-                                fontSize: Dimensions.screenWidth * 0.055,
+                                fontSize: Dimensions.screenWidth * 0.05,
                                 fontWeight: FontWeight.bold,
                               )),
                           SizedBox(
@@ -90,7 +90,7 @@ class _SimpleInterestState extends State<SimpleInterest> {
                           Text('0.39',
                               style: GoogleFonts.inter(
                                 color: Colors.white,
-                                fontSize: Dimensions.screenWidth * 0.07,
+                                fontSize: Dimensions.screenWidth * 0.065,
                                 fontWeight: FontWeight.bold,
                               )),
                         ]),

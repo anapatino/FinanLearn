@@ -1,12 +1,12 @@
 import 'package:finanlearn/domain/models/user.dart';
-import 'package:finanlearn/ui/widgets/Input.dart';
-import 'package:finanlearn/ui/widgets/messageResponse.dart';
+import 'package:finanlearn/ui/widgets/input.dart';
+import 'package:finanlearn/ui/widgets/message_response.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../utils/Dimensions.dart';
-import '../dashboard/Dashboard.dart';
+import '../../utils/dimensions.dart';
+import '../dashboard/dashboard.dart';
 
 class Register extends StatefulWidget {
   const Register({super.key});
@@ -43,7 +43,7 @@ class _RegisterState extends State<Register> {
             children: [
               IconButton(
                   onPressed: () {
-                    Get.offAll(() => const Dashboard());
+                    Get.offAllNamed('/principal');
                   },
                   icon: const Icon(Icons.arrow_back_rounded,
                       color: Colors.white)),
@@ -62,7 +62,7 @@ class _RegisterState extends State<Register> {
               Padding(
                 padding: EdgeInsets.only(
                     left: Dimensions.screenWidth * 0.03,
-                    bottom: Dimensions.screenHeight * 0.06),
+                    bottom: Dimensions.screenHeight * 0.04),
                 child: Text("para aprender y crecer financieramente",
                     style: GoogleFonts.inter(
                         color: Colors.white,
@@ -74,12 +74,12 @@ class _RegisterState extends State<Register> {
                   left: Dimensions.screenWidth * 0.03,
                 ),
                 child: SizedBox(
-                  height: Dimensions.screenHeight * 0.60,
+                  height: Dimensions.screenHeight * 0.69,
                   child: Stack(
                     children: [
                       Container(
                         width: Dimensions.width80,
-                        height: Dimensions.screenHeight * 0.45,
+                        height: Dimensions.screenHeight * 0.48,
                         decoration: const BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.all(
@@ -126,18 +126,19 @@ class _RegisterState extends State<Register> {
                         ),
                       ),
                       Positioned(
-                        top: Dimensions.screenHeight * 0.41,
+                        top: Dimensions.screenHeight * 0.44,
                         left: Dimensions.width10,
                         child: ElevatedButton(
                           onPressed: () {
-                            registerUser(
-                              context,
-                              controlFirstName,
-                              controlLastName,
-                              controlEmail,
-                              controlPassword,
-                            );
-                            Get.offAll(() => const Dashboard());
+                            if (validation(
+                                    context,
+                                    controlFirstName,
+                                    controlLastName,
+                                    controlEmail,
+                                    controlPassword) ==
+                                true) {
+                              Get.offAll(() => const Dashboard());
+                            }
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor:
@@ -167,7 +168,7 @@ class _RegisterState extends State<Register> {
     );
   }
 
-  registerUser(
+  validation(
       BuildContext context,
       TextEditingController controlFirstName,
       TextEditingController controlLastName,
@@ -177,11 +178,19 @@ class _RegisterState extends State<Register> {
     String lastName = controlLastName.text;
     String email = controlEmail.text;
     String password = controlPassword.text;
-    listUsers.add(Users(
-        firstName: firstName,
-        lastName: lastName,
-        email: email,
-        password: password));
-    messageResponse(context, "El usuario  ha sido registrado");
+    if (firstName.isNotEmpty &&
+        lastName.isNotEmpty &&
+        email.isNotEmpty &&
+        password.isNotEmpty) {
+      listUsers.add(Users(
+          firstName: firstName,
+          lastName: lastName,
+          email: email,
+          password: password));
+      return true;
+    } else {
+      messageResponse(context, "El usuario no ha sido ingresado");
+    }
+    return false;
   }
 }
