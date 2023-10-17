@@ -4,11 +4,10 @@ import 'package:finanlearn/ui/widgets/input.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import '../../../domain/controllers/publicity_controller.dart';
 import '../../utils/dimensions.dart';
-import '../../widgets/messageResponse.dart';
-import '../dashboard/Dashboard.dart';
+import '../../widgets/message_response.dart';
+import '../dashboard/dashboard.dart';
 
 class Register extends StatefulWidget {
   const Register({super.key});
@@ -184,7 +183,7 @@ class _RegisterState extends State<Register> {
     return false;
   }
 
-  void registerUser() {
+  Future<void> registerUser() async {
     String firstName = controlFirstName.text;
     String lastName = controlLastName.text;
     String email = controlEmail.text;
@@ -196,8 +195,9 @@ class _RegisterState extends State<Register> {
         lastName.isNotEmpty) {
       userController
           .register(firstName, lastName, email, password)
-          .then((value) {
+          .then((value) async {
         if (userController.userEmail.isNotEmpty) {
+          await publicityController.viewPublicity();
           Get.offAll(() => const Dashboard());
         }
       }).catchError((error) {

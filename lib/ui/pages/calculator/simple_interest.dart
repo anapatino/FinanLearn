@@ -1,8 +1,11 @@
+import 'dart:developer';
+
 import 'package:finanlearn/ui/utils/dimensions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../domain/models/simple_interest.dart';
 import '../../widgets/input.dart';
 import '../dashboard/Dashboard.dart';
 
@@ -18,11 +21,12 @@ class _SimpleInterestState extends State<SimpleInterest> {
   TextEditingController controllerMonths = TextEditingController();
   TextEditingController controllerDays = TextEditingController();
   TextEditingController controllerCapital = TextEditingController();
-  TextEditingController controllerInterestProduced = TextEditingController();
+  TextEditingController controllerInterestEarned = TextEditingController();
   TextEditingController controllerInterestRate = TextEditingController();
 
-  List<String>? listPeriod = ['Año', 'Meses', 'Dias'];
-  String? dropdownValue = 'Seleccione una opcion';
+  List<String>? listPeriod = ['Año', 'Mes', 'Dia'];
+  String? dropdownValue = 'Año';
+  late double time = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -142,18 +146,23 @@ class _SimpleInterestState extends State<SimpleInterest> {
                 SizedBox(height: Dimensions.screenHeight * 0.022),
                 Row(
                   children: [
-                    InputMedium(
-                      controller: controllerYear,
-                      labelText: 'Años',
-                    ),
-                    InputMedium(
-                      controller: controllerMonths,
-                      labelText: 'Meses',
-                    ),
-                    InputMedium(
-                      controller: controllerDays,
-                      labelText: 'Dias',
-                    ),
+                    if (dropdownValue == 'Año')
+                      InputMedium(
+                        controller: controllerYear,
+                        labelText: 'Año',
+                      ),
+                    if (dropdownValue == 'Mes' || dropdownValue == 'Año')
+                      InputMedium(
+                        controller: controllerMonths,
+                        labelText: 'Mes',
+                      ),
+                    if (dropdownValue == 'Mes' ||
+                        dropdownValue == 'Dia' ||
+                        dropdownValue == 'Año')
+                      InputMedium(
+                        controller: controllerDays,
+                        labelText: 'Dia',
+                      )
                   ],
                 ),
                 SizedBox(height: Dimensions.screenHeight * 0.022),
@@ -168,12 +177,12 @@ class _SimpleInterestState extends State<SimpleInterest> {
                 ),
                 SizedBox(height: Dimensions.screenHeight * 0.022),
                 InputColor(
-                  controller: controllerInterestRate,
+                  controller: controllerInterestEarned,
                   labelText: 'Interes Producido',
                 ),
                 SizedBox(height: Dimensions.screenHeight * 0.02),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: validation,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color.fromRGBO(11, 138, 47, 1),
                     shape: RoundedRectangleBorder(
@@ -193,5 +202,95 @@ class _SimpleInterestState extends State<SimpleInterest> {
             ),
           )),
     );
+  }
+
+  void validation() {
+    double years = double.parse(controllerYear.text);
+    double months = double.parse(controllerMonths.text);
+    double days = double.parse(controllerDays.text);
+
+    switch (dropdownValue) {
+      case 'years':
+        time = (years / 1) + (months / 12) + (days / 360);
+        break;
+      case 'months':
+        time = (months / 12) + (days / 360);
+        break;
+      case 'days':
+        time = days / 360;
+        break;
+      default:
+        break;
+    }
+    if (controllerCapital.text.isNotEmpty &&
+        controllerInterestRate.text.isNotEmpty) {
+      validationCalculateFutureValue();
+    }
+
+    if (controllerInterestEarned.text.isNotEmpty &&
+        controllerInterestRate.text.isNotEmpty) {
+      validationCalculateCapital();
+    }
+    if (controllerCapital.text.isNotEmpty &&
+        controllerInterestEarned.text.isNotEmpty) {
+      validationCalculateInterestRate();
+    }
+    if (controllerCapital.text.isNotEmpty &&
+        controllerInterestEarned.text.isNotEmpty &&
+        controllerInterestRate.text.isNotEmpty) {
+      validationCalculateTime();
+    }
+  }
+
+  validationCalculateFutureValue() {
+    Map<String, double> data = {
+      'capital': double.parse(controllerCapital.text),
+      'interestRate': double.parse(controllerInterestRate.text),
+    };
+
+    double result = InterestSimple.calculateFutureValue(
+        data: data, isChecked: true, time: time);
+    log('valor futuro');
+    log(result.toString());
+  }
+
+  validationCalculateCapital() {
+    Map<String, double> data = {
+      'interestRate': double.parse(controllerInterestRate.text),
+      'interestEarned': double.parse(controllerInterestEarned.text),
+    };
+
+    double result = InterestSimple.calculateCapital(data: data, time: time);
+    log('capital');
+
+    log(result.toString());
+  }
+
+  validationCalculateInterestRate() {
+    Map<String, double> data = {
+      'capital': double.parse(controllerCapital.text),
+      'interestEarned': double.parse(controllerInterestEarned.text),
+    };
+
+    double result = InterestSimple.calculateCapital(data: data, time: time);
+    log('tasa de interes');
+
+    log(result.toString());
+  }
+
+  validationCalculateTime() {
+    Map<String, double> data = {
+      'capital': double.parse(controllerCapital.text),
+      'interestEarned': double.parse(controllerInterestEarned.text),
+      'interestRate': double.parse(controllerInterestRate.text),
+    };
+
+    Map<String, int> result =
+        InterestSimple.calculateTime(data: data, showTime: 'days');
+    log('tiempo');
+
+    log(result['years'].toString());
+    log(result['months'].toString());
+    log(result['days'].toString());
   }
 }

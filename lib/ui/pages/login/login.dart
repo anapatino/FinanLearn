@@ -1,5 +1,5 @@
 import 'package:finanlearn/domain/controllers/user_controller.dart';
-import 'package:finanlearn/ui/pages/dashboard/Dashboard.dart';
+import 'package:finanlearn/ui/pages/dashboard/dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -7,7 +7,7 @@ import '../../../domain/controllers/publicity_controller.dart';
 import '../../../domain/models/user.dart';
 import '../../utils/dimensions.dart';
 import '../../widgets/input.dart';
-import '../../widgets/messageResponse.dart';
+import '../../widgets/message_response.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -181,14 +181,14 @@ class _LoginState extends State<Login> {
     return false;
   }
 
-  void loginUser() {
+  Future<void> loginUser() async {
     String email = controlEmail.text;
     String password = controlPassword.text;
 
     if (email.isNotEmpty && password.isNotEmpty) {
-      userController.login(email, password).then((value) {
+      userController.login(email, password).then((value) async {
         if (userController.userEmail.isNotEmpty) {
-          publicityController.viewPublicity();
+          await publicityController.viewPublicity();
           Get.offAll(() => const Dashboard());
         } else {
           messageResponse(context, "El correo/contraseña no es correcto");

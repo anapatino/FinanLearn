@@ -1,10 +1,9 @@
-import 'package:finanlearn/ui/utils/Dimensions.dart';
+import 'package:finanlearn/ui/utils/dimensions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-import '../../widgets/questionCard.dart';
-import '../dashboard/Dashboard.dart';
+import '../../widgets/question_card.dart';
+import '../dashboard/dashboard.dart';
 
 class Test extends StatefulWidget {
   const Test({super.key});
