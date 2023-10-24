@@ -2,7 +2,6 @@ import 'package:finanlearn/ui/utils/dimensions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import '../../widgets/question_card.dart';
 import '../dashboard/dashboard.dart';
 
@@ -49,7 +48,7 @@ class _TestState extends State<Test> {
                 child: Text('Test de aprendizaje',
                     style: GoogleFonts.inter(
                       color: const Color.fromRGBO(51, 190, 91, 1),
-                      fontSize: Dimensions.screenWidth * 0.08,
+                      fontSize: 29,
                       fontWeight: FontWeight.bold,
                     )),
               ),

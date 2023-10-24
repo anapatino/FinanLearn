@@ -55,21 +55,27 @@ class FlashCard extends StatelessWidget {
             SizedBox(
               height: Dimensions.screenHeight * 0.01,
             ),
-            Text(title,
-                style: GoogleFonts.inter(
-                  color: Colors.black,
-                  fontSize: Dimensions.screenWidth * 0.035,
-                  fontWeight: FontWeight.bold,
-                )),
+            SizedBox(
+              width: Dimensions.screenWidth * 0.69,
+              child: Text(title,
+                  style: GoogleFonts.inter(
+                    color: Colors.black,
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                  )),
+            ),
             SizedBox(
               height: Dimensions.screenHeight * 0.01,
             ),
-            Text(description,
-                style: GoogleFonts.inter(
-                  color: Colors.black,
-                  fontSize: Dimensions.screenWidth * 0.03,
-                  fontWeight: FontWeight.w300,
-                )),
+            SizedBox(
+              width: Dimensions.screenWidth * 0.69,
+              child: Text(description,
+                  style: GoogleFonts.inter(
+                    color: Colors.black,
+                    fontSize: 10,
+                    fontWeight: FontWeight.w300,
+                  )),
+            ),
           ],
         ),
       ),

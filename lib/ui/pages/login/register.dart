@@ -1,11 +1,12 @@
+import 'package:finanlearn/domain/controllers/user_controller.dart';
 import 'package:finanlearn/domain/models/user.dart';
 import 'package:finanlearn/ui/widgets/input.dart';
-import 'package:finanlearn/ui/widgets/message_response.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import '../../../domain/controllers/publicity_controller.dart';
 import '../../utils/dimensions.dart';
+import '../../widgets/message_response.dart';
 import '../dashboard/dashboard.dart';
 
 class Register extends StatefulWidget {
@@ -20,15 +21,8 @@ class _RegisterState extends State<Register> {
   TextEditingController controlLastName = TextEditingController();
   TextEditingController controlEmail = TextEditingController();
   TextEditingController controlPassword = TextEditingController();
-  void viewSnackBar(String title, String message, Color backgroundColor) {
-    Get.snackbar(
-      title,
-      message,
-      icon: const Icon(Icons.warning),
-      backgroundColor: backgroundColor,
-      duration: const Duration(seconds: 5),
-    );
-  }
+  UserController userController = Get.find();
+  PublicityController publicityController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -129,17 +123,7 @@ class _RegisterState extends State<Register> {
                         top: Dimensions.screenHeight * 0.44,
                         left: Dimensions.width10,
                         child: ElevatedButton(
-                          onPressed: () {
-                            if (validation(
-                                    context,
-                                    controlFirstName,
-                                    controlLastName,
-                                    controlEmail,
-                                    controlPassword) ==
-                                true) {
-                              Get.offAll(() => const Dashboard());
-                            }
-                          },
+                          onPressed: registerUser,
                           style: ElevatedButton.styleFrom(
                             backgroundColor:
                                 const Color.fromRGBO(51, 190, 91, 1),
@@ -187,10 +171,44 @@ class _RegisterState extends State<Register> {
           lastName: lastName,
           email: email,
           password: password));
+      publicityController.viewPublicity();
+      messageResponse(context, "El usuario registrado");
+      for (var element in listUsers) {
+        print(element.firstName);
+      }
       return true;
     } else {
       messageResponse(context, "El usuario no ha sido ingresado");
     }
     return false;
+  }
+
+  Future<void> registerUser() async {
+    String firstName = controlFirstName.text;
+    String lastName = controlLastName.text;
+    String email = controlEmail.text;
+    String password = controlPassword.text;
+
+    if (email.isNotEmpty &&
+        password.isNotEmpty &&
+        firstName.isNotEmpty &&
+        lastName.isNotEmpty) {
+      userController
+          .register(firstName, lastName, email, password)
+          .then((value) async {
+        if (userController.userEmail.isNotEmpty) {
+          await publicityController.viewPublicity();
+          Get.offAll(() => const Dashboard());
+        }
+      }).catchError((error) {
+        messageResponse(context, "Error: $error");
+      });
+      controlFirstName.clear();
+      controlLastName.clear();
+      controlEmail.clear();
+      controlPassword.clear();
+    } else {
+      messageResponse(context, "Por favor, ingresa el correo y la contraseña.");
+    }
   }
 }

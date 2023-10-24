@@ -6,6 +6,15 @@ class Users {
       required this.lastName,
       required this.email,
       required this.password});
+
+  factory Users.fromJson(Map<String, dynamic> json) {
+    return Users(
+      firstName: json['firstName'] ?? '',
+      lastName: json['lastName'] ?? '',
+      email: json['email'] ?? '',
+      password: json['password'] ?? '',
+    );
+  }
 }
 
 List<Users> listUsers = [

@@ -2,9 +2,8 @@ import 'package:finanlearn/ui/utils/dimensions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import '../../widgets/input.dart';
-import '../dashboard/dashboard.dart';
+import '../dashboard/Dashboard.dart';
 
 class CompoundInterest extends StatefulWidget {
   const CompoundInterest({super.key});
@@ -142,18 +141,23 @@ class _CompoundInterestState extends State<CompoundInterest> {
                 SizedBox(height: Dimensions.screenHeight * 0.022),
                 Row(
                   children: [
-                    InputMedium(
-                      controller: controllerYear,
-                      labelText: 'Años',
-                    ),
-                    InputMedium(
-                      controller: controllerMonths,
-                      labelText: 'Meses',
-                    ),
-                    InputMedium(
-                      controller: controllerDays,
-                      labelText: 'Dias',
-                    ),
+                    if (dropdownValue == 'Año')
+                      InputMedium(
+                        controller: controllerYear,
+                        labelText: 'Año',
+                      ),
+                    if (dropdownValue == 'Mes' || dropdownValue == 'Año')
+                      InputMedium(
+                        controller: controllerMonths,
+                        labelText: 'Mes',
+                      ),
+                    if (dropdownValue == 'Mes' ||
+                        dropdownValue == 'Dia' ||
+                        dropdownValue == 'Año')
+                      InputMedium(
+                        controller: controllerDays,
+                        labelText: 'Dia',
+                      )
                   ],
                 ),
                 SizedBox(height: Dimensions.screenHeight * 0.022),
