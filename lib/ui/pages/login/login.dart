@@ -58,7 +58,7 @@ class _LoginState extends State<Login> {
                     child: Text("Registrar",
                         style: GoogleFonts.inter(
                           color: Colors.white,
-                          fontSize: 17,
+                          fontSize: Dimensions.screenWidth * 0.05,
                           letterSpacing: 1.6,
                         )),
                   ),
@@ -72,7 +72,7 @@ class _LoginState extends State<Login> {
                 child: Text("Ingresar",
                     style: GoogleFonts.inter(
                         color: Colors.white,
-                        fontSize: 45,
+                        fontSize: Dimensions.screenWidth * 0.15,
                         letterSpacing: 1.6,
                         fontWeight: FontWeight.w600)),
               ),
@@ -83,7 +83,7 @@ class _LoginState extends State<Login> {
                 child: Text("para aprender y crecer financieramente",
                     style: GoogleFonts.inter(
                         color: Colors.white,
-                        fontSize: 15,
+                        fontSize: Dimensions.screenWidth * 0.04,
                         fontWeight: FontWeight.normal)),
               ),
               Padding(
@@ -146,7 +146,7 @@ class _LoginState extends State<Login> {
                           child: Text("Ingresar",
                               style: GoogleFonts.inter(
                                 color: Colors.white,
-                                fontSize: 20,
+                                fontSize: Dimensions.screenWidth * 0.05,
                                 letterSpacing: 1.6,
                               )),
                         ),

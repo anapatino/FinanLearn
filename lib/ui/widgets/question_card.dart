@@ -47,7 +47,7 @@ class _QuestionCardState extends State<QuestionCard> {
               Text(widget.title,
                   style: GoogleFonts.inter(
                     color: widget.color,
-                    fontSize: 19,
+                    fontSize: Dimensions.screenWidth * 0.06,
                     fontWeight: FontWeight.bold,
                   )),
               SizedBox(
@@ -56,7 +56,7 @@ class _QuestionCardState extends State<QuestionCard> {
               Text(widget.description,
                   style: GoogleFonts.inter(
                     color: Colors.black,
-                    fontSize: 18,
+                    fontSize: Dimensions.screenWidth * 0.045,
                     fontWeight: FontWeight.w400,
                   )),
               SizedBox(
@@ -84,7 +84,7 @@ class _QuestionCardState extends State<QuestionCard> {
                         widget.listOptions[key]!,
                         style: GoogleFonts.inter(
                           color: Colors.black,
-                          fontSize: 16,
+                          fontSize: Dimensions.screenWidth * 0.045,
                         ),
                       ),
                     ],

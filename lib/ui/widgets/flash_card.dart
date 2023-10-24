@@ -37,7 +37,7 @@ class FlashCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              height: Dimensions.screenHeight * 0.17,
+              height: Dimensions.screenHeight * 0.16,
               width: Dimensions.screenWidth * 0.65,
               decoration: BoxDecoration(
                   color: color,

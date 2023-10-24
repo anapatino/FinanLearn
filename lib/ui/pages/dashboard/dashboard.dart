@@ -68,7 +68,7 @@ class _DashboardState extends State<Dashboard> {
                     child: Text("Hola,",
                         style: GoogleFonts.inter(
                             color: Colors.black,
-                            fontSize: 30,
+                            fontSize: Dimensions.screenWidth * 0.08,
                             fontWeight: FontWeight.normal)),
                   ),
                   Positioned(
@@ -80,7 +80,7 @@ class _DashboardState extends State<Dashboard> {
                             : 'Usuario',
                         style: GoogleFonts.inter(
                             color: Colors.black,
-                            fontSize: 39,
+                            fontSize: Dimensions.screenWidth * 0.1,
                             fontWeight: FontWeight.bold)),
                   ),
                 ],
@@ -157,7 +157,7 @@ class _DashboardState extends State<Dashboard> {
                           child: Text("Material Educativo",
                               style: GoogleFonts.inter(
                                 color: Colors.black,
-                                fontSize: 24.5,
+                                fontSize: Dimensions.screenWidth * 0.075,
                                 fontWeight: FontWeight.bold,
                               )),
                         )

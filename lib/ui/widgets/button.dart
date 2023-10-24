@@ -51,7 +51,7 @@ class Button extends StatelessWidget {
             Text(title,
                 style: GoogleFonts.inter(
                   color: Colors.white,
-                  fontSize: 14,
+                  fontSize: Dimensions.screenWidth * 0.04,
                   fontWeight: FontWeight.bold,
                 )),
           ],

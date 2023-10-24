@@ -35,7 +35,7 @@ class CardHistory extends StatelessWidget {
         minWidth: Dimensions.screenWidth * 0.90,
         child: Padding(
           padding: EdgeInsets.symmetric(
-              vertical: Dimensions.screenHeight * 0.03,
+              vertical: Dimensions.screenHeight * 0.025,
               horizontal: Dimensions.screenWidth * 0.03),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -43,7 +43,7 @@ class CardHistory extends StatelessWidget {
               Text(title,
                   style: GoogleFonts.inter(
                     color: Colors.white,
-                    fontSize: 19,
+                    fontSize: Dimensions.screenWidth * 0.05,
                     fontWeight: FontWeight.bold,
                   )),
               SizedBox(
@@ -59,7 +59,7 @@ class CardHistory extends StatelessWidget {
                           Text("Interes:",
                               style: GoogleFonts.inter(
                                 color: Colors.white,
-                                fontSize: 18,
+                                fontSize: Dimensions.screenWidth * 0.045,
                                 fontWeight: FontWeight.w400,
                               )),
                           SizedBox(
@@ -68,7 +68,7 @@ class CardHistory extends StatelessWidget {
                           Text(interest!,
                               style: GoogleFonts.inter(
                                 color: Colors.white,
-                                fontSize: 18,
+                                fontSize: Dimensions.screenWidth * 0.045,
                                 fontWeight: FontWeight.w400,
                               )),
                         ],
@@ -85,7 +85,7 @@ class CardHistory extends StatelessWidget {
                           Text("Tasa:",
                               style: GoogleFonts.inter(
                                 color: Colors.white,
-                                fontSize: 18,
+                                fontSize: Dimensions.screenWidth * 0.045,
                                 fontWeight: FontWeight.w400,
                               )),
                           SizedBox(
@@ -94,7 +94,7 @@ class CardHistory extends StatelessWidget {
                           Text(rate!,
                               style: GoogleFonts.inter(
                                 color: Colors.white,
-                                fontSize: 18,
+                                fontSize: Dimensions.screenWidth * 0.045,
                                 fontWeight: FontWeight.w400,
                               )),
                         ],
@@ -111,7 +111,7 @@ class CardHistory extends StatelessWidget {
                           Text("Tiempo:",
                               style: GoogleFonts.inter(
                                 color: Colors.white,
-                                fontSize: 18,
+                                fontSize: Dimensions.screenWidth * 0.045,
                                 fontWeight: FontWeight.w400,
                               )),
                           SizedBox(
@@ -120,7 +120,7 @@ class CardHistory extends StatelessWidget {
                           Text(time!,
                               style: GoogleFonts.inter(
                                 color: Colors.white,
-                                fontSize: 18,
+                                fontSize: Dimensions.screenWidth * 0.045,
                                 fontWeight: FontWeight.w400,
                               )),
                         ],
@@ -132,7 +132,7 @@ class CardHistory extends StatelessWidget {
                   Text("Resultado:",
                       style: GoogleFonts.inter(
                         color: Colors.white,
-                        fontSize: 18,
+                        fontSize: Dimensions.screenWidth * 0.045,
                         fontWeight: FontWeight.bold,
                       )),
                   SizedBox(
@@ -141,7 +141,7 @@ class CardHistory extends StatelessWidget {
                   Text(result,
                       style: GoogleFonts.inter(
                         color: Colors.white,
-                        fontSize: 18,
+                        fontSize: Dimensions.screenWidth * 0.045,
                         fontWeight: FontWeight.bold,
                       )),
                 ],

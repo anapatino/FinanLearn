@@ -1,4 +1,4 @@
-import 'package:finanlearn/ui/utils/Dimensions.dart';
+import 'package:finanlearn/ui/utils/dimensions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -37,7 +37,7 @@ class _MainState extends State<Main> {
                 'Domina conceptos financieros con FinanLearn',
                 style: GoogleFonts.inter(
                     color: Colors.white,
-                    fontSize: 45,
+                    fontSize: Dimensions.screenHeight * 0.065,
                     fontWeight: FontWeight.w700),
               ),
             ),
@@ -61,7 +61,7 @@ class _MainState extends State<Main> {
                 child: Text("Ingresar",
                     style: GoogleFonts.inter(
                       color: Colors.white,
-                      fontSize: 20,
+                      fontSize: Dimensions.screenWidth * 0.05,
                       letterSpacing: 1.6,
                     )),
               ),

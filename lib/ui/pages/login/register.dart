@@ -37,7 +37,7 @@ class _RegisterState extends State<Register> {
             children: [
               IconButton(
                   onPressed: () {
-                    Get.offAll(() => const Dashboard());
+                    Get.offAllNamed('/principal');
                   },
                   icon: const Icon(Icons.arrow_back_rounded,
                       color: Colors.white)),
@@ -49,18 +49,18 @@ class _RegisterState extends State<Register> {
                 child: Text("Registrar  ",
                     style: GoogleFonts.inter(
                         color: Colors.white,
-                        fontSize: 45,
+                        fontSize: Dimensions.screenWidth * 0.15,
                         letterSpacing: 1.6,
                         fontWeight: FontWeight.w600)),
               ),
               Padding(
                 padding: EdgeInsets.only(
                     left: Dimensions.screenWidth * 0.03,
-                    bottom: Dimensions.screenHeight * 0.06),
+                    bottom: Dimensions.screenHeight * 0.04),
                 child: Text("para aprender y crecer financieramente",
                     style: GoogleFonts.inter(
                         color: Colors.white,
-                        fontSize: 15,
+                        fontSize: Dimensions.screenWidth * 0.04,
                         fontWeight: FontWeight.normal)),
               ),
               Padding(
@@ -68,12 +68,12 @@ class _RegisterState extends State<Register> {
                   left: Dimensions.screenWidth * 0.03,
                 ),
                 child: SizedBox(
-                  height: Dimensions.screenHeight * 0.60,
+                  height: Dimensions.screenHeight * 0.69,
                   child: Stack(
                     children: [
                       Container(
                         width: Dimensions.width80,
-                        height: Dimensions.screenHeight * 0.50,
+                        height: Dimensions.screenHeight * 0.48,
                         decoration: const BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.all(
@@ -120,7 +120,7 @@ class _RegisterState extends State<Register> {
                         ),
                       ),
                       Positioned(
-                        top: Dimensions.screenHeight * 0.45,
+                        top: Dimensions.screenHeight * 0.44,
                         left: Dimensions.width10,
                         child: ElevatedButton(
                           onPressed: registerUser,
@@ -136,7 +136,7 @@ class _RegisterState extends State<Register> {
                           child: Text("Registrar",
                               style: GoogleFonts.inter(
                                 color: Colors.white,
-                                fontSize: 20,
+                                fontSize: Dimensions.screenWidth * 0.05,
                                 letterSpacing: 1.6,
                               )),
                         ),

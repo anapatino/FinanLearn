@@ -45,7 +45,7 @@ class _HistoryState extends State<History> {
                 child: Text('Historial de ejercicios',
                     style: GoogleFonts.inter(
                       color: Colors.black,
-                      fontSize: 29,
+                      fontSize: Dimensions.screenWidth * 0.08,
                       fontWeight: FontWeight.bold,
                     )),
               ),
