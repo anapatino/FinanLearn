@@ -36,18 +36,18 @@ class Interest {
       interestEarned: json['interestEarned'] ?? '',
     );
   }
-  factory Interest.toJson(Map<String, dynamic> json) {
-    return Interest(
-      capital: json['capital'] ?? '',
-      day: json['day'] ?? '',
-      futureValue: json['futureValue'] ?? '',
-      type: json['type'] ?? '',
-      interestRate: json['interestRate'] ?? '',
-      month: json['month'] ?? '',
-      result: json['result'] ?? '',
-      year: json['year'] ?? '',
-      title: json['title'] ?? '',
-      interestEarned: json['interestEarned'] ?? '',
-    );
+  Map<String, dynamic> toJson() {
+    return {
+      'capital': capital,
+      'day': day,
+      'futureValue': futureValue,
+      'type': type,
+      'interestRate': interestRate,
+      'month': month,
+      'result': result,
+      'year': year,
+      'title': title,
+      'interestEarned': interestEarned,
+    };
   }
 }

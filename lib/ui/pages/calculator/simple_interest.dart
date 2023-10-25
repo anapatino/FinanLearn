@@ -311,7 +311,8 @@ class _SimpleInterestState extends State<SimpleInterest> {
       title: 'Calcular valor futuro',
       year: controllerYear.text,
       interestEarned: controllerInterestEarned.text,
-    ); /*interestController.addInterestHistory(interest);*/
+    );
+    interestController.addInterestHistory(interest);
   }
 
   validationCalculateCapital() {
@@ -339,7 +340,8 @@ class _SimpleInterestState extends State<SimpleInterest> {
       title: 'Calcular capital',
       year: controllerYear.text,
       interestEarned: controllerInterestEarned.text,
-    ); /*interestController.addInterestHistory(interest);*/
+    );
+    interestController.addInterestHistory(interest);
   }
 
   validationCalculateInterestRate() {
@@ -366,7 +368,7 @@ class _SimpleInterestState extends State<SimpleInterest> {
       year: controllerYear.text,
       interestEarned: controllerInterestEarned.text,
     );
-    /*interestController.addInterestHistory(interest);*/
+    interestController.addInterestHistory(interest);
   }
 
   validationCalculateTime() {
@@ -396,6 +398,7 @@ class _SimpleInterestState extends State<SimpleInterest> {
       title: 'Calcular tiempo',
       year: '',
       interestEarned: controllerInterestEarned.text,
-    ); /*interestController.addInterestHistory(interest);*/
+    );
+    interestController.addInterestHistory(interest);
   }
 }

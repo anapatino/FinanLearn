@@ -1,3 +1,4 @@
+import 'package:finanlearn/domain/controllers/interest_controller.dart';
 import 'package:finanlearn/domain/models/publicity.dart';
 import 'package:finanlearn/ui/pages/calculator/compound_interest.dart';
 import 'package:finanlearn/ui/pages/history/history.dart';
@@ -24,6 +25,8 @@ class _DashboardState extends State<Dashboard> {
   UserController userController = Get.find();
   PublicityController publicityController = Get.find();
   late Future<List<Publicity>> listPublicity = PublicityRequest.viewPublicity();
+  InterestController historyController = Get.find();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -128,7 +131,8 @@ class _DashboardState extends State<Dashboard> {
                       children: [
                         Button(
                           color: const Color.fromRGBO(100, 220, 185, 1),
-                          onPressed: () {
+                          onPressed: () async {
+                            await historyController.viewPublicity();
                             Get.offAll(() => const History());
                           },
                           icon: Icons.format_align_left_rounded,

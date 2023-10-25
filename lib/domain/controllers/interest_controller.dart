@@ -17,11 +17,11 @@ class InterestController extends GetxController {
     }
   }
 
-  /*Future<void> addInterestHistory(Interest interest) async {
+  Future<void> addInterestHistory(Interest interest) async {
     try {
       await InterestRequest.addInterestToHistory(interest);
     } on FirebaseAuthException catch (e) {
       return Future.error(e);
     }
-  }*/
+  }
 }

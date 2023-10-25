@@ -1,9 +1,14 @@
+import 'dart:developer';
+
 import 'package:finanlearn/ui/utils/dimensions.dart';
 import 'package:finanlearn/ui/widgets/card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../data/service/interest_history_request.dart';
+import '../../../domain/controllers/interest_controller.dart';
+import '../../../domain/models/interest.dart';
 import '../dashboard/Dashboard.dart';
 
 class History extends StatefulWidget {
@@ -14,6 +19,9 @@ class History extends StatefulWidget {
 }
 
 class _HistoryState extends State<History> {
+  InterestController historyController = Get.find();
+  late Future<List<Interest>> listHistory = InterestRequest.viewListHistory();
+  int length = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,48 +58,65 @@ class _HistoryState extends State<History> {
                     )),
               ),
               SizedBox(
-                height: Dimensions.screenHeight * 0.98,
-                child: ListView(
-                  children: const [
-                    CardHistory(
-                      color: Color.fromRGBO(100, 220, 185, 1),
-                      result: '5000',
-                      title: 'Calcular capital',
-                      interest: '300',
-                      rate: '6%',
-                      time: '1 año',
-                    ),
-                    CardHistory(
-                      color: Color.fromRGBO(11, 138, 47, 1),
-                      capital: '1000',
-                      result: '1102.5',
-                      title: 'Calcular monto',
-                      rate: '5%',
-                      time: '2 años',
-                    ),
-                    CardHistory(
-                      color: Color.fromRGBO(100, 220, 185, 1),
-                      result: '5000',
-                      title: 'Calcular capital',
-                      interest: '300',
-                      rate: '6%',
-                      time: '1 año',
-                    ),
-                    CardHistory(
-                      color: Color.fromRGBO(100, 220, 185, 1),
-                      result: '5000',
-                      title: 'Calcular capital',
-                      interest: '300',
-                      rate: '6%',
-                      time: '1 año',
-                    )
-                  ],
-                ),
-              ),
+                  height: Dimensions.screenHeight * 0.98,
+                  child: viewListHistory()),
             ],
           ),
         ),
       ),
+    );
+  }
+
+  Widget viewListHistory() {
+    return ListView.builder(
+      scrollDirection: Axis.vertical,
+      itemCount: historyController.listHistory?.isEmpty == true
+          ? 0
+          : historyController.listHistory!.length,
+      shrinkWrap: true,
+      itemBuilder: (context, index) {
+        return FutureBuilder<List<Interest>>(
+          future: listHistory,
+          builder: (context, position) {
+            if (position.hasData) {
+              String date = position.data![index].year.isNotEmpty
+                  ? '${position.data![index].year} año '
+                  : '';
+              date += position.data![index].month.isNotEmpty
+                  ? '${position.data![index].month} meses '
+                  : '';
+
+              date += position.data![index].day.isNotEmpty
+                  ? '${position.data![index].day} dias '
+                  : '';
+
+              return CardHistory(
+                color: position.data![index].type.toString() == 'simple'
+                    ? const Color.fromRGBO(100, 220, 185, 1)
+                    : const Color.fromRGBO(11, 138, 47, 1),
+                result: position.data![index].result.toString(),
+                title: position.data![index].title.toString(),
+                interest: position.data![index].interestEarned.isNotEmpty
+                    ? position.data![index].interestEarned.toString()
+                    : null,
+                rate: position.data![index].interestRate.isNotEmpty
+                    ? position.data![index].interestRate.toString()
+                    : null,
+                futureValue: position.data![index].futureValue.isNotEmpty
+                    ? position.data![index].futureValue.toString()
+                    : null,
+                capital: position.data![index].capital.isNotEmpty
+                    ? position.data![index].capital.toString()
+                    : null,
+                time: date.isEmpty ? null : date,
+              );
+            } else if (position.hasError) {
+              return Text('${position.error}');
+            }
+            return const CircularProgressIndicator();
+          },
+        );
+      },
     );
   }
 }

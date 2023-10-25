@@ -6,6 +6,7 @@ class CardHistory extends StatelessWidget {
   final Color color;
   final String title;
   final String? interest;
+  final String? futureValue;
   final String? capital;
   final String? rate;
   final String? time;
@@ -15,6 +16,7 @@ class CardHistory extends StatelessWidget {
     required this.color,
     required this.title,
     this.interest,
+    this.futureValue,
     this.capital,
     this.rate,
     this.time,
@@ -49,6 +51,32 @@ class CardHistory extends StatelessWidget {
               SizedBox(
                 height: Dimensions.screenHeight * 0.01,
               ),
+              futureValue != null
+                  ? Padding(
+                      padding: EdgeInsets.only(
+                        bottom: Dimensions.screenHeight * 0.01,
+                      ),
+                      child: Row(
+                        children: [
+                          Text("Valor futuro:",
+                              style: GoogleFonts.inter(
+                                color: Colors.white,
+                                fontSize: Dimensions.screenWidth * 0.045,
+                                fontWeight: FontWeight.w400,
+                              )),
+                          SizedBox(
+                            width: Dimensions.screenHeight * 0.01,
+                          ),
+                          Text(futureValue!,
+                              style: GoogleFonts.inter(
+                                color: Colors.white,
+                                fontSize: Dimensions.screenWidth * 0.045,
+                                fontWeight: FontWeight.w400,
+                              )),
+                        ],
+                      ),
+                    )
+                  : const SizedBox(),
               interest != null
                   ? Padding(
                       padding: EdgeInsets.only(
@@ -56,7 +84,7 @@ class CardHistory extends StatelessWidget {
                       ),
                       child: Row(
                         children: [
-                          Text("Interes:",
+                          Text("Interes producido:",
                               style: GoogleFonts.inter(
                                 color: Colors.white,
                                 fontSize: Dimensions.screenWidth * 0.045,
@@ -91,7 +119,7 @@ class CardHistory extends StatelessWidget {
                           SizedBox(
                             width: Dimensions.screenHeight * 0.01,
                           ),
-                          Text(rate!,
+                          Text('${rate!}%',
                               style: GoogleFonts.inter(
                                 color: Colors.white,
                                 fontSize: Dimensions.screenWidth * 0.045,
@@ -127,16 +155,18 @@ class CardHistory extends StatelessWidget {
                       ),
                     )
                   : const SizedBox(),
-              Row(
+              Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("Resultado:",
+                  Text("Resultado",
                       style: GoogleFonts.inter(
                         color: Colors.white,
                         fontSize: Dimensions.screenWidth * 0.045,
                         fontWeight: FontWeight.bold,
                       )),
                   SizedBox(
-                    width: Dimensions.screenHeight * 0.01,
+                    height: Dimensions.screenHeight * 0.01,
                   ),
                   Text(result,
                       style: GoogleFonts.inter(

@@ -14,7 +14,8 @@ class InterestRequest {
     return history;
   }
 
-  /*static Future<void> addInterestToHistory(Interest interest) async {
-  await database.collection('interest_history').add(interest);
-}*/
+  static Future<void> addInterestToHistory(Interest interest) async {
+    Map<String, dynamic> interestData = interest.toJson();
+    await database.collection('interest_history').add(interestData);
+  }
 }
