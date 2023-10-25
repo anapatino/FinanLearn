@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 class InterestSimple {
   static double calculateFutureValue({
     required Map<String, double> data,
@@ -12,7 +10,6 @@ class InterestSimple {
 
     if (isChecked) {
       newFutureValue = capital * (1 + interestRate * time);
-      log(newFutureValue.toString());
     } else {
       newFutureValue = capital * interestRate * time;
     }

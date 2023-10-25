@@ -8,6 +8,8 @@ import 'dart:developer';
 
 import 'package:get/get.dart';
 
+import 'domain/controllers/interest_controller.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   try {
@@ -15,6 +17,7 @@ void main() async {
         options: DefaultFirebaseOptions.currentPlatform);
     Get.put(UserController());
     Get.put(PublicityController());
+    Get.put(InterestController());
     runApp(const App());
   } catch (e) {
     log("Error al iniciar la aplicación: $e");

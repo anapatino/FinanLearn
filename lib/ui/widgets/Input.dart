@@ -59,6 +59,7 @@ class InputColor extends StatelessWidget {
         style: GoogleFonts.inter(color: Colors.black),
         autofocus: false,
         controller: controller,
+        keyboardType: TextInputType.number,
         decoration: InputDecoration(
           contentPadding: const EdgeInsets.only(left: 30),
           filled: true,
@@ -98,6 +99,7 @@ class InputMedium extends StatelessWidget {
         style: GoogleFonts.inter(color: Colors.black),
         autofocus: false,
         controller: controller,
+        keyboardType: TextInputType.number,
         decoration: InputDecoration(
           contentPadding: const EdgeInsets.only(left: 15),
           filled: true,
