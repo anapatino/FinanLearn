@@ -1,11 +1,8 @@
-import 'dart:developer';
-
 import 'package:finanlearn/ui/utils/dimensions.dart';
 import 'package:finanlearn/ui/widgets/card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import '../../../data/service/interest_history_request.dart';
 import '../../../domain/controllers/interest_controller.dart';
 import '../../../domain/models/interest.dart';
