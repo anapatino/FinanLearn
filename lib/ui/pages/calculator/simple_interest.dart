@@ -207,7 +207,7 @@ class _SimpleInterestState extends State<SimpleInterest> {
                           )),
                     ),
                     ElevatedButton(
-                      onPressed: validation,
+                      onPressed: () {},
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color.fromRGBO(11, 138, 47, 1),
                         shape: RoundedRectangleBorder(
