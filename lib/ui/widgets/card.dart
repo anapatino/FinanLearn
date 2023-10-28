@@ -10,6 +10,7 @@ class CardHistory extends StatelessWidget {
   final String? capital;
   final String? rate;
   final String? time;
+  final String? compoundAmount;
   final String result;
 
   const CardHistory({
@@ -20,6 +21,7 @@ class CardHistory extends StatelessWidget {
     this.capital,
     this.rate,
     this.time,
+    this.compoundAmount,
     required this.result,
     Key? key,
   }) : super(key: key);
@@ -51,6 +53,32 @@ class CardHistory extends StatelessWidget {
               SizedBox(
                 height: Dimensions.screenHeight * 0.01,
               ),
+              capital != null
+                  ? Padding(
+                      padding: EdgeInsets.only(
+                        bottom: Dimensions.screenHeight * 0.01,
+                      ),
+                      child: Row(
+                        children: [
+                          Text("Capital:",
+                              style: GoogleFonts.inter(
+                                color: Colors.white,
+                                fontSize: Dimensions.screenWidth * 0.045,
+                                fontWeight: FontWeight.w400,
+                              )),
+                          SizedBox(
+                            width: Dimensions.screenHeight * 0.01,
+                          ),
+                          Text(capital!,
+                              style: GoogleFonts.inter(
+                                color: Colors.white,
+                                fontSize: Dimensions.screenWidth * 0.045,
+                                fontWeight: FontWeight.w400,
+                              )),
+                        ],
+                      ),
+                    )
+                  : const SizedBox(),
               futureValue != null
                   ? Padding(
                       padding: EdgeInsets.only(
@@ -146,6 +174,32 @@ class CardHistory extends StatelessWidget {
                             width: Dimensions.screenHeight * 0.01,
                           ),
                           Text(time!,
+                              style: GoogleFonts.inter(
+                                color: Colors.white,
+                                fontSize: Dimensions.screenWidth * 0.045,
+                                fontWeight: FontWeight.w400,
+                              )),
+                        ],
+                      ),
+                    )
+                  : const SizedBox(),
+              compoundAmount != null
+                  ? Padding(
+                      padding: EdgeInsets.only(
+                        bottom: Dimensions.screenHeight * 0.01,
+                      ),
+                      child: Row(
+                        children: [
+                          Text("Monto compuesto:",
+                              style: GoogleFonts.inter(
+                                color: Colors.white,
+                                fontSize: Dimensions.screenWidth * 0.045,
+                                fontWeight: FontWeight.w400,
+                              )),
+                          SizedBox(
+                            width: Dimensions.screenHeight * 0.01,
+                          ),
+                          Text(compoundAmount!,
                               style: GoogleFonts.inter(
                                 color: Colors.white,
                                 fontSize: Dimensions.screenWidth * 0.045,

@@ -1,7 +1,11 @@
+import 'dart:developer';
 import 'package:finanlearn/ui/utils/dimensions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../../../domain/controllers/interest_controller.dart';
+import '../../../domain/models/compound_interest.dart';
+import '../../../domain/models/interest.dart';
 import '../../widgets/input.dart';
 import '../dashboard/Dashboard.dart';
 
@@ -17,11 +21,19 @@ class _CompoundInterestState extends State<CompoundInterest> {
   TextEditingController controllerMonths = TextEditingController();
   TextEditingController controllerDays = TextEditingController();
   TextEditingController controllerCapital = TextEditingController();
-  TextEditingController controllerInterestProduced = TextEditingController();
+  TextEditingController controllerCompoundAmount = TextEditingController();
   TextEditingController controllerInterestRate = TextEditingController();
+  InterestController interestController = Get.find();
 
-  List<String>? listPeriod = ['Año', 'Meses', 'Dias'];
+  List<String>? listPeriod = [
+    'Monto compuesto',
+    'Capital',
+    'Interes',
+    'Tiempo',
+  ];
+  String? value = '';
   String? dropdownValue = 'Seleccione una opcion';
+  double time = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -86,11 +98,11 @@ class _CompoundInterestState extends State<CompoundInterest> {
                           SizedBox(
                             height: Dimensions.screenHeight * 0.015,
                           ),
-                          Text('0.39',
+                          Text(value!,
                               style: GoogleFonts.inter(
                                 color: Colors.white,
-                                fontSize: Dimensions.screenWidth * 0.065,
-                                fontWeight: FontWeight.bold,
+                                fontSize: Dimensions.screenWidth * 0.058,
+                                fontWeight: FontWeight.normal,
                               )),
                         ]),
                   ),
@@ -141,23 +153,18 @@ class _CompoundInterestState extends State<CompoundInterest> {
                 SizedBox(height: Dimensions.screenHeight * 0.022),
                 Row(
                   children: [
-                    if (dropdownValue == 'Año')
-                      InputMedium(
-                        controller: controllerYear,
-                        labelText: 'Año',
-                      ),
-                    if (dropdownValue == 'Mes' || dropdownValue == 'Año')
-                      InputMedium(
-                        controller: controllerMonths,
-                        labelText: 'Mes',
-                      ),
-                    if (dropdownValue == 'Mes' ||
-                        dropdownValue == 'Dia' ||
-                        dropdownValue == 'Año')
-                      InputMedium(
-                        controller: controllerDays,
-                        labelText: 'Dia',
-                      )
+                    InputMedium(
+                      controller: controllerYear,
+                      labelText: 'Año',
+                    ),
+                    InputMedium(
+                      controller: controllerMonths,
+                      labelText: 'Mes',
+                    ),
+                    InputMedium(
+                      controller: controllerDays,
+                      labelText: 'Dia',
+                    )
                   ],
                 ),
                 SizedBox(height: Dimensions.screenHeight * 0.022),
@@ -172,30 +179,213 @@ class _CompoundInterestState extends State<CompoundInterest> {
                 ),
                 SizedBox(height: Dimensions.screenHeight * 0.022),
                 InputColor(
-                  controller: controllerInterestRate,
-                  labelText: 'Interes Producido',
+                  controller: controllerCompoundAmount,
+                  labelText: 'Monto compuesto',
                 ),
                 SizedBox(height: Dimensions.screenHeight * 0.02),
-                ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color.fromRGBO(11, 138, 47, 1),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(25),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    ElevatedButton(
+                      onPressed: clear,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color.fromRGBO(217, 217, 217, 1),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(25),
+                        ),
+                        minimumSize: Size(
+                            Dimensions.width40, Dimensions.screenHeight * 0.07),
+                      ),
+                      child: Text("Borrar",
+                          style: GoogleFonts.inter(
+                            color: const Color.fromARGB(255, 56, 55, 55),
+                            fontSize: Dimensions.screenWidth * 0.05,
+                            letterSpacing: 1,
+                          )),
                     ),
-                    minimumSize: Size(
-                        Dimensions.width40, Dimensions.screenHeight * 0.07),
-                  ),
-                  child: Text("Calcular",
-                      style: GoogleFonts.inter(
-                        color: Colors.white,
-                        fontSize: Dimensions.screenWidth * 0.05,
-                        letterSpacing: 1,
-                      )),
-                ),
+                    ElevatedButton(
+                      onPressed: validation,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color.fromRGBO(11, 138, 47, 1),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(25),
+                        ),
+                        minimumSize: Size(
+                            Dimensions.width40, Dimensions.screenHeight * 0.07),
+                      ),
+                      child: Text("Calcular",
+                          style: GoogleFonts.inter(
+                            color: Colors.white,
+                            fontSize: Dimensions.screenWidth * 0.05,
+                            letterSpacing: 1,
+                          )),
+                    ),
+                  ],
+                )
               ],
             ),
           )),
     );
+  }
+
+  void clear() {
+    setState(() {
+      value = '';
+      dropdownValue = 'Seleccione una opcion';
+    });
+    controllerYear.clear();
+    controllerMonths.clear();
+    controllerDays.clear();
+    controllerCapital.clear();
+    controllerCompoundAmount.clear();
+    controllerInterestRate.clear();
+  }
+
+  void validation() {
+    try {
+      double? years = double.tryParse(controllerYear.text);
+      double? months = double.tryParse(controllerMonths.text);
+      double? days = double.tryParse(controllerDays.text);
+      if (controllerYear.text.isNotEmpty) {
+        time = years ?? 0.0;
+      } else {
+        if (controllerMonths.text.isNotEmpty) {
+          time = months ?? 0.0;
+        } else {
+          if (controllerDays.text.isNotEmpty) {
+            time = days ?? 0.0;
+          }
+        }
+      }
+    } catch (e) {
+      log('Error al analizar los valores: $e');
+    }
+    switch (dropdownValue) {
+      case 'Monto compuesto':
+        validationCalculateFutureValue();
+        break;
+      case 'Capital':
+        validationCalculateCapital();
+        break;
+      case 'Interes':
+        validationCalculateInterestRate();
+        break;
+      case 'Tiempo':
+        validationCalculateTime();
+        break;
+      default:
+        break;
+    }
+  }
+
+  validationCalculateFutureValue() {
+    Map<String, double> data = {
+      'capital': controllerCapital.text.isNotEmpty
+          ? double.parse(controllerCapital.text)
+          : 0,
+      'interestRate': controllerInterestRate.text.isNotEmpty
+          ? double.parse(controllerInterestRate.text)
+          : 0,
+    };
+    double result = InterestCompound.calculateFutureValue(data, time);
+    setState(() {
+      value = result.toStringAsFixed(0).toString();
+    });
+    Interest interest = Interest(
+        capital: controllerCapital.text,
+        day: controllerDays.text,
+        futureValue: '',
+        interestRate: controllerInterestRate.text,
+        month: controllerMonths.text,
+        result: result.toStringAsFixed(0).toString(),
+        type: 'compuesto',
+        title: 'Calcular Monto compuesto',
+        year: controllerYear.text,
+        compoundAmount: '',
+        interestEarned: '');
+    interestController.addInterestHistory(interest);
+  }
+
+  validationCalculateCapital() {
+    Map<String, double> data = {
+      'interestRate': controllerInterestRate.text.isNotEmpty
+          ? double.parse(controllerInterestRate.text)
+          : 0,
+      'compoundAmount': controllerCompoundAmount.text.isNotEmpty
+          ? double.parse(controllerCompoundAmount.text)
+          : 0,
+    };
+
+    double result = InterestCompound.calculatePresentValue(data, time);
+    setState(() {
+      value = result.toStringAsFixed(0).toString();
+    });
+    Interest interest = Interest(
+      capital: '',
+      day: controllerDays.text,
+      futureValue: '',
+      interestRate: controllerInterestRate.text,
+      month: controllerMonths.text,
+      result: result.toStringAsFixed(0).toString(),
+      type: 'compuesto',
+      title: 'Calcular capital',
+      year: controllerYear.text,
+      compoundAmount: controllerCompoundAmount.text,
+      interestEarned: '',
+    );
+    interestController.addInterestHistory(interest);
+  }
+
+  validationCalculateInterestRate() {
+    Map<String, double> data = {
+      'capital': double.parse(controllerCapital.text),
+      'compoundAmount': double.parse(controllerCompoundAmount.text),
+    };
+
+    double resul = InterestCompound.calculateInterestRate(data, time) * 100;
+    setState(() {
+      value = '${resul.toStringAsFixed(1)}%';
+    });
+    Interest interest = Interest(
+      capital: controllerCapital.text,
+      day: controllerDays.text,
+      futureValue: '',
+      interestRate: '',
+      month: controllerMonths.text,
+      result: '${resul.toStringAsFixed(1)}%',
+      type: 'compuesto',
+      title: 'Calcular interes',
+      compoundAmount: controllerCompoundAmount.text,
+      year: controllerYear.text,
+      interestEarned: '',
+    );
+    interestController.addInterestHistory(interest);
+  }
+
+  validationCalculateTime() {
+    Map<String, double> data = {
+      'capital': double.parse(controllerCapital.text),
+      'compoundAmount': double.parse(controllerCompoundAmount.text),
+      'interestRate': double.parse(controllerInterestRate.text),
+    };
+    double result = InterestCompound.calculateTime(data, 'years');
+
+    setState(() {
+      value = result.toStringAsFixed(0).toString();
+    });
+    Interest interest = Interest(
+      capital: controllerCapital.text,
+      day: '',
+      futureValue: '',
+      interestRate: controllerInterestRate.text,
+      month: '',
+      result: result.toStringAsFixed(0).toString(),
+      type: 'compuesto',
+      title: 'Calcular tiempo',
+      year: '',
+      compoundAmount: controllerCompoundAmount.text,
+      interestEarned: '',
+    );
+    interestController.addInterestHistory(interest);
   }
 }

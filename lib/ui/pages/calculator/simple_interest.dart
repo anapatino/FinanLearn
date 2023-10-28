@@ -207,7 +207,7 @@ class _SimpleInterestState extends State<SimpleInterest> {
                           )),
                     ),
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: validation,
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color.fromRGBO(11, 138, 47, 1),
                         shape: RoundedRectangleBorder(
@@ -310,6 +310,7 @@ class _SimpleInterestState extends State<SimpleInterest> {
       type: 'simple',
       title: 'Calcular valor futuro',
       year: controllerYear.text,
+      compoundAmount: '',
       interestEarned: controllerInterestEarned.text,
     );
     interestController.addInterestHistory(interest);
@@ -339,6 +340,7 @@ class _SimpleInterestState extends State<SimpleInterest> {
       type: 'simple',
       title: 'Calcular capital',
       year: controllerYear.text,
+      compoundAmount: '',
       interestEarned: controllerInterestEarned.text,
     );
     interestController.addInterestHistory(interest);
@@ -366,6 +368,7 @@ class _SimpleInterestState extends State<SimpleInterest> {
       type: 'simple',
       title: 'Calcular interes',
       year: controllerYear.text,
+      compoundAmount: '',
       interestEarned: controllerInterestEarned.text,
     );
     interestController.addInterestHistory(interest);
@@ -397,6 +400,7 @@ class _SimpleInterestState extends State<SimpleInterest> {
       type: 'simple',
       title: 'Calcular tiempo',
       year: '',
+      compoundAmount: '',
       interestEarned: controllerInterestEarned.text,
     );
     interestController.addInterestHistory(interest);

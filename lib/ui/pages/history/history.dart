@@ -55,7 +55,7 @@ class _HistoryState extends State<History> {
                     )),
               ),
               SizedBox(
-                  height: Dimensions.screenHeight * 0.98,
+                  height: Dimensions.screenHeight * 0.75,
                   child: viewListHistory()),
             ],
           ),
@@ -104,6 +104,9 @@ class _HistoryState extends State<History> {
                     : null,
                 capital: position.data![index].capital.isNotEmpty
                     ? position.data![index].capital.toString()
+                    : null,
+                compoundAmount: position.data![index].compoundAmount.isNotEmpty
+                    ? position.data![index].compoundAmount.toString()
                     : null,
                 time: date.isEmpty ? null : date,
               );

@@ -8,6 +8,7 @@ class Interest {
       type,
       year,
       interestEarned,
+      compoundAmount,
       title;
 
   Interest(
@@ -20,6 +21,7 @@ class Interest {
       required this.type,
       required this.year,
       required this.title,
+      required this.compoundAmount,
       required this.interestEarned});
 
   factory Interest.fromJson(Map<String, dynamic> json) {
@@ -33,6 +35,7 @@ class Interest {
       result: json['result'] ?? '',
       year: json['year'] ?? '',
       title: json['title'] ?? '',
+      compoundAmount: json['compoundAmount'] ?? '',
       interestEarned: json['interestEarned'] ?? '',
     );
   }
@@ -47,6 +50,7 @@ class Interest {
       'result': result,
       'year': year,
       'title': title,
+      'compoundAmount': compoundAmount,
       'interestEarned': interestEarned,
     };
   }
